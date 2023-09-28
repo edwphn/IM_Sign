@@ -7,6 +7,7 @@ from cryptography.hazmat.primitives import serialization
 from datetime import datetime
 from cryptography.hazmat.primitives.serialization import pkcs12
 
+
 def get_signing_date():
     now = datetime.utcnow()
     formatted_date = now.strftime("D:%Y%m%d%H%M%S+00'00'")
