@@ -7,8 +7,8 @@ import base64
 import pyodbc
 from loguru import logger
 
-app = FastAPI()
 
+app = FastAPI()
 
 class File(BaseModel):
     content: str
@@ -54,7 +54,6 @@ async def validate_file(file_data: File):
 if __name__ == "__main__":
     try:
         import uvicorn
-
         uvicorn.run(app, host="0.0.0.0", port=8000)
     except Exception as e:
         logger.exception("An unexpected error occurred:")
