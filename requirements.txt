@@ -1,0 +1,6 @@
+cryptography
+endesive
+fastapi
+pydantic
+pyodbc
+loguru
