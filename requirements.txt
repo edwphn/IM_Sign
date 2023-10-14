@@ -1,6 +1,5 @@
-cryptography
 endesive
 fastapi
+uvicorn
 pydantic
-pyodbc
-loguru
+cryptography
