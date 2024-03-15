@@ -4,12 +4,12 @@ from endesive import pdf
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
-from datetime import datetime
+from datetime import datetime, timezone
 from cryptography.hazmat.primitives.serialization import pkcs12
 
 
 def get_signing_date():
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     formatted_date = now.strftime("D:%Y%m%d%H%M%S+00'00'")
     return formatted_date.encode()
 
