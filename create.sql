@@ -17,3 +17,4 @@ CREATE TABLE document_status_history (
     RecordTime DATETIME NOT NULL,
     FOREIGN KEY (UUID) REFERENCES documents(UUID)
 );
+-- recreate for czech
