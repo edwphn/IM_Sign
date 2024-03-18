@@ -20,7 +20,7 @@ async def sign(request: Request, sender: str = Header(...)):
     # Validate file
     is_valid = await validate_file(content)
     if not is_valid:
-        raise HTTPException(status_code=400, detail="Invalid file. Check file integrity or size limit.")
+        raise HTTPException(status_code=400, detail="Invalid file. Check the file integrity or size limit.")
 
     file_path = f"files/{file_uuid}.pdf"
     async with aiofiles.open(file_path, 'wb') as out_file:
