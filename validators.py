@@ -1,3 +1,4 @@
+import re
 import PyPDF2
 from io import BytesIO
 import asyncio
@@ -27,3 +28,14 @@ async def validate_file(file_content: bytes) -> bool:
         return False
 
     return True
+
+
+def sanitize_input(input_str: str) -> str:
+    sanitized_str = re.sub(r'<script.*?>.*?</script>', '', input_str, flags=re.DOTALL)
+    sanitized_str = re.sub(r'<.*?>', '', sanitized_str)
+
+    special_chars = ["'", '"', ";", "--"]
+    for char in special_chars:
+        sanitized_str = sanitized_str.replace(char, "")
+
+    return sanitized_str
