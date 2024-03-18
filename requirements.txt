@@ -4,3 +4,7 @@ uvicorn
 pydantic
 cryptography
 loguru
+pyodbc
+aiofiles
+python-multipart
+PyPDF2
