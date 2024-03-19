@@ -1,30 +1,40 @@
 import pyodbc
 import asyncio
 from functools import partial
+from config_loader import config_vars, SCRIPT_DIR
 
-DATABASE_URL = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=10.0.0.56;DATABASE=Kofax_custom;UID=sql3_servis;PWD=A3eURK7sAbj9CjTM"
+
+insert_Documents = """
+INSERT INTO Documents (UUID, SignTimestamp, FileName, OriginalDocId, FileSize, RecordTime, Sender)
+VALUES (?, ?, ?, ?, ?, ?, ?)
+"""
+
+insert_DocumentsHistory = """
+INSERT INTO DocumentsHistory (UUID, Status, Message, RecordTime)
+VALUES (?, ?, ?, ?)
+"""
+
 
 async def execute_sql_from_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         sql_command = file.read()
         await execute_sql(sql_command)
 
-insert_Sign_PDF = """
-INSERT INTO Sign_PDF (UUID, SignTimestamp, FileName, OriginalDocId, FileSize, RecordTime, Sender)
-VALUES (?, ?, ?, ?, ?, ?, ?)
-"""
-
-insert_Sign_PDF_history = """
-INSERT INTO Sign_PDF_history (UUID, Status, Message, RecordTime)
-VALUES (?, ?, ?, ?)
-"""
 
 async def run_in_executor(func, *args):
     loop = asyncio.get_running_loop()
     return await loop.run_in_executor(None, partial(func, *args))
 
+
 async def execute_sql(sql, params=None):
-    connection = pyodbc.connect(DATABASE_URL, autocommit=True)
+    connection = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};'
+        f'SERVER={config_vars["DATABASE"]["SERVER"]};'
+        f'DATABASE={config_vars["DATABASE"]["NAME"]};'
+        f'UID={config_vars["DATABASE"]["USER"]};'
+        f'PWD={config_vars["DATABASE"]["PASSWORD"]}',
+        autocommit=True
+    )
     try:
         with connection.cursor() as cursor:
             if params:
@@ -34,6 +44,7 @@ async def execute_sql(sql, params=None):
     finally:
         connection.close()
 
+
 async def create_tables():
-    await execute_sql_from_file('create_Sign_PDF.sql')
-    await execute_sql_from_file('create_Sign_PDF_history.sql')
+    await execute_sql_from_file('create_Documents.sql')
+    await execute_sql_from_file('create_DocumentsHistory.sql')
