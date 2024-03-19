@@ -1,3 +1,5 @@
+# log_sett.py
+
 import sys
 from loguru import logger
 
@@ -9,3 +11,5 @@ def setup_logger():
     logger.add(
         "file.log", rotation="10 MB", format="{time} {level} {message}", level="DEBUG"
     )
+
+setup_logger()

@@ -1,14 +1,19 @@
+# main.py
+
 from fastapi import FastAPI, Header, Request, HTTPException
 import uuid
 from datetime import datetime, timezone
-from database_handler import create_tables, execute_sql, insert_Sign_PDF, insert_Sign_PDF_history
+from database_handler import create_tables, execute_sql, insert_Documents, insert_DocumentsHistory
+from maintenance import maintenance
 from validators import validate_file, sanitize_input
 import aiofiles
-from log_sett import setup_logger
-from loguru import logger
+from log_sett import logger
 
-setup_logger()
 
+# Maintenance on startup
+maintenance()
+
+logger.info('Program started')
 app = FastAPI()
 
 app.add_event_handler("startup", create_tables)
@@ -27,7 +32,7 @@ async def sign(request: Request, sender: str = Header(...)):
         logger.warning(f"File validation failed for UUID: {file_uuid}")
         raise HTTPException(status_code=400, detail="Invalid file. Check the file integrity or size limit.")
 
-    file_path = f"files/{file_uuid}.pdf"
+    file_path = f"data/{file_uuid}.pdf"
     try:
         async with aiofiles.open(file_path, 'wb') as out_file:
             await out_file.write(content)
@@ -40,8 +45,8 @@ async def sign(request: Request, sender: str = Header(...)):
     file_size = len(content)
 
     try:
-        await execute_sql(insert_Sign_PDF, (file_uuid, now, 'unknown.pdf', None, file_size, now, sender))
-        await execute_sql(insert_Sign_PDF_history, (file_uuid, 'Received', 'Received file from client', now))
+        await execute_sql(insert_Documents, (file_uuid, now, 'unknown.pdf', None, file_size, now, sender))
+        await execute_sql(insert_DocumentsHistory, (file_uuid, 'Received', 'Received file from client', now))
         logger.info(f"Database operations successful for UUID: {file_uuid}")
     except Exception as e:
         logger.error(f"Database operation failed for UUID: {file_uuid}. Error: {e}")
@@ -53,11 +58,3 @@ if __name__ == "__main__":
     logger.info("Starting FastAPI server on 127.0.0.1:8000")
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
-
-'''
-подключить логгер
-загрузить сертификат
-включить подписывание 
-'''
-

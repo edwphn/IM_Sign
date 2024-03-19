@@ -1,36 +1,56 @@
+# cert_handler.py
+
 import os
-import pyodbc
+import sys
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.serialization import pkcs12
 from cryptography.fernet import Fernet
+from database_handler import execute_sql
+from config_loader import config_vars
 
-# Конфигурация
-folder_path = 'path_to_your_special_folder'  # Путь к папке с сертификатами
-db_conn_str = 'DRIVER={SQL Server};SERVER=your_server_name;DATABASE=your_database_name;UID=your_username;PWD=your_password;'  # Строка подключения к базе данных
-encryption_key = b'your_fernet_key'  # Ключ для шифрования (генерируется один раз и сохраняется в безопасности)
 
-# Создание объекта для шифрования
+folder_path = config_vars['DIRECTORIES']['CERTIFICATE']
+encryption_key = config_vars['ENCRYPTION']['KEY']
+
 cipher_suite = Fernet(encryption_key)
 
-def encrypt_and_upload_certificate(file_path):
-    # Чтение и шифрование файла сертификата
+def get_certificate_metadata(pfx_path):
+    pfx_password = '123456'
+
+    try:
+        with open(pfx_path, 'rb') as f:
+            pfx_data = f.read()
+
+        private_key, certificate, additional_certificates = pkcs12.load_key_and_certificates(
+            pfx_data, pfx_password.encode(), default_backend()
+        )
+
+        return certificate.not_valid_after_utc, certificate.issuer.rfc4514_string(), certificate.subject.rfc4514_string()
+
+    except Exception as e:
+        print("An error occurred:", e)
+        sys.exit(1)
+
+
+def encrypt_certificate(file_path):
     with open(file_path, 'rb') as file:
         certificate_data = file.read()
-    encrypted_data = cipher_suite.encrypt(certificate_data)
-
-    # Подключение к базе данных и загрузка зашифрованных данных
-    conn = pyodbc.connect(db_conn_str)
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO YourTable (YourColumn) VALUES (?)", encrypted_data)
-    conn.commit()
-    cursor.close()
-    conn.close()
-    print(f"Сертификат {os.path.basename(file_path)} зашифрован и загружен в базу данных.")
+    return cipher_suite.encrypt(certificate_data)
 
 
-# Проверка папки на наличие сертификатов
 for filename in os.listdir(folder_path):
     if filename.endswith('.pfx'):
         file_path = os.path.join(folder_path, filename)
-        encrypt_and_upload_certificate(file_path)
-        # Удаление файла сертификата после загрузки в базу данных
-        os.remove(file_path)
-        print(f"Файл {os.path.basename(file_path)} удалён.")
+        expiration, issuer, subject = get_certificate_metadata(file_path)
+        encrypted_data = encrypt_certificate(file_path)
+
+        print(expiration, issuer, subject, encrypted_data)
+
+        sql_insert = """
+        INSERT INTO dbo.Certificates (Valid, Expiration, Issuer, Subject, CertificateData)
+        VALUES (?, ?, ?, ?, ?)
+        """
+        execute_sql(sql_insert, (1, expiration, issuer, subject, encrypted_data))
+
+        # os.remove(file_path)
+        print(f"File {os.path.basename(file_path)} was deleted.")
