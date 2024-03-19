@@ -3,7 +3,7 @@
 from fastapi import FastAPI, Header, Request, HTTPException
 import uuid
 from datetime import datetime, timezone
-from database_handler import create_tables, execute_sql, insert_Documents, insert_DocumentsHistory
+from _database import create_tables, execute_sql, insert_Documents, insert_DocumentsHistory
 from maintenance import maintenance
 from validators import validate_file, sanitize_input
 import aiofiles

@@ -1,11 +1,11 @@
-# cert_handler.py
+# _certificate.py
 
 import os
 import sys
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.serialization import pkcs12
 from cryptography.fernet import Fernet
-from database_handler import execute_sql
+from _database import execute_sql_sync
 from config_loader import config_vars
 
 
@@ -18,9 +18,6 @@ def get_certificate_metadata(pfx_path):
     pfx_password = '123456'
 
     try:
-        with open(pfx_path, 'rb') as f:
-            pfx_data = f.read()
-
         private_key, certificate, additional_certificates = pkcs12.load_key_and_certificates(
             pfx_data, pfx_password.encode(), default_backend()
         )
@@ -29,7 +26,6 @@ def get_certificate_metadata(pfx_path):
 
     except Exception as e:
         print("An error occurred:", e)
-        sys.exit(1)
 
 
 def encrypt_certificate(file_path):
@@ -41,7 +37,9 @@ def encrypt_certificate(file_path):
 for filename in os.listdir(folder_path):
     if filename.endswith('.pfx'):
         file_path = os.path.join(folder_path, filename)
-        expiration, issuer, subject = get_certificate_metadata(file_path)
+        with open(file_path, 'rb') as f:
+            pfx_data = f.read()
+        expiration, issuer, subject = get_certificate_metadata(pfx_data)
         encrypted_data = encrypt_certificate(file_path)
 
         print(expiration, issuer, subject, encrypted_data)
@@ -50,7 +48,7 @@ for filename in os.listdir(folder_path):
         INSERT INTO dbo.Certificates (Valid, Expiration, Issuer, Subject, CertificateData)
         VALUES (?, ?, ?, ?, ?)
         """
-        execute_sql(sql_insert, (1, expiration, issuer, subject, encrypted_data))
+        execute_sql_sync(sql_insert, (1, expiration, issuer, subject, encrypted_data))
 
         # os.remove(file_path)
         print(f"File {os.path.basename(file_path)} was deleted.")
