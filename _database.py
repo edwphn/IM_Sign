@@ -50,8 +50,6 @@ async def create_tables():
     await execute_sql_from_file('create_DocumentsHistory.sql')
 
 
-import pyodbc
-
 def execute_sql_sync(sql, params=None):
     try:
         connection = pyodbc.connect(

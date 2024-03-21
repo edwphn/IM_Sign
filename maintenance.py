@@ -6,6 +6,7 @@ import datetime
 import sys
 from config_loader import config_vars
 from log_sett import logger
+from _certificate import check_certificate_validity
 
 
 def maintenance() -> None:
@@ -25,6 +26,7 @@ def maintenance() -> None:
 
     logger.info("Initializing maintenance")
 
+    check_certificate_validity()
 
 
-
+maintenance()
