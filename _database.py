@@ -2,6 +2,7 @@ import pyodbc
 import asyncio
 from functools import partial
 from config_loader import config_vars, SCRIPT_DIR
+from log_sett import logger
 
 
 insert_Documents = """
@@ -76,3 +77,28 @@ def execute_sql_sync(sql, params=None):
         cursor.close()
         connection.close()
 
+
+def execute_sql_select_sync(sql):
+    try:
+        connection = pyodbc.connect(
+            'DRIVER={ODBC Driver 17 for SQL Server};'
+            f'SERVER={config_vars["DATABASE"]["SERVER"]};'
+            f'DATABASE={config_vars["DATABASE"]["NAME"]};'
+            f'UID={config_vars["DATABASE"]["USER"]};'
+            f'PWD={config_vars["DATABASE"]["PASSWORD"]}',
+            autocommit=True
+        )
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        return results
+
+    except pyodbc.Error as e:
+        logger.error(f'Error executing SQL SELECT operation: {e}')
+        raise
+
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()

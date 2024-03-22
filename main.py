@@ -19,8 +19,9 @@ app = FastAPI()
 app.add_event_handler("startup", create_tables)
 
 @app.post("/sign")
-async def sign(request: Request, sender: str = Header(...)):
+async def sign(request: Request, sender: str = Header(...), purpose: str = Header(...)):
     sender = sanitize_input(sender)
+    purpose = sanitize_input(purpose)
     file_uuid = str(uuid.uuid4())
     logger.info(f"Generated UUID for file: {file_uuid} from sender: {sender}")
 
