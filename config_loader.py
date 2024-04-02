@@ -7,7 +7,7 @@ from typing import Any, Dict
 from log_sett import logger
 
 
-logger.info('Loading configuration settings')
+logger.info('Loading configuration settings.')
 
 # Script directory
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -50,3 +50,6 @@ try:
 except KeyError as e:
     logger.error(f"Error setting configuration variables: {e}")
     raise Exception(f"Error setting configuration variables: {e}")
+
+
+logger.success('Settings have been loaded.')

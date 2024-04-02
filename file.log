@@ -1,13 +1,53 @@
-2024-03-18T22:26:00.608127+0100 INFO Starting FastAPI server on 127.0.0.1:8000
-2024-03-18T22:26:38.665119+0100 INFO Starting FastAPI server on 127.0.0.1:8000
-2024-03-19T14:08:02.383309+0100 INFO Loading configuration settings
-2024-03-19T15:04:31.126556+0100 INFO Loading configuration settings
-2024-03-19T15:05:30.993731+0100 INFO Loading configuration settings
-2024-03-19T15:05:53.443974+0100 INFO Loading configuration settings
-2024-03-19T15:15:32.625713+0100 INFO Loading configuration settings
-2024-03-19T15:18:21.967694+0100 INFO Loading configuration settings
-2024-03-19T15:19:56.805528+0100 INFO Loading configuration settings
-2024-03-19T15:22:34.485480+0100 INFO Loading configuration settings
-2024-03-19T16:02:36.322142+0100 INFO Loading configuration settings
-2024-03-19T16:03:16.979213+0100 INFO Loading configuration settings
-2024-03-19T16:03:35.402142+0100 INFO Loading configuration settings
+2024-04-02 15:44:37 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 15:44:37 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 15:44:38 INFO _database.py:74 Checking database table existence.
+2024-04-02 15:50:33 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 15:50:33 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 15:50:33 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:03:52 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:03:52 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:03:52 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:05:06 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:05:06 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:05:10 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:05:10 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:05:10 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:05:31 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:05:31 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:05:33 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:05:33 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:05:33 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:05:43 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:05:43 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:05:46 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:05:46 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:05:46 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:06:05 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:06:05 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:06:07 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:06:07 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:06:08 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:11:29 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:11:29 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:11:29 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:13:36 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:13:36 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:13:36 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:19:35 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:19:35 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:19:35 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:22:43 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:22:43 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:22:43 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:24:40 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:24:40 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:24:40 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:31:30 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:31:30 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:31:30 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:32:51 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:32:51 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:32:51 INFO _database.py:74 Checking database table existence.
+2024-04-02 16:43:36 INFO config_loader.py:10 Loading configuration settings.
+2024-04-02 16:43:36 SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-02 16:43:36 INFO _database.py:74 Checking database table existence.

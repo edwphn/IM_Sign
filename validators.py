@@ -3,6 +3,7 @@ import PyPDF2
 from io import BytesIO
 import asyncio
 
+
 async def validate_file(file_content: bytes) -> bool:
     async def check_file_size() -> bool:
         max_size = 1011183
