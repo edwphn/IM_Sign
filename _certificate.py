@@ -32,7 +32,7 @@ def get_certificate_metadata(cert_data):
         return certificate.not_valid_after_utc, certificate.issuer.rfc4514_string(), certificate.subject.rfc4514_string()
 
     except Exception as e:
-        logger.error(f"An error occurred: {e}")
+        logger.critical(f"An error occurred: {e}")
 
 
 def load_certificates_from_disk() -> None:
@@ -47,7 +47,7 @@ def load_certificates_from_disk() -> None:
             try:
                 expiration, issuer, subject = get_certificate_metadata(pfx_data)
             except Exception as e:
-                logger.error(f"An error occurred while processing certificate {filename}: {e}")
+                logger.critical(f"An error occurred while processing certificate {filename}: {e}")
                 continue
 
             encrypted_data = encrypt_certificate(file_path)
@@ -76,7 +76,7 @@ def check_certificate_validity() -> bool:
     try:
         encrypted_certificate_data = get_latest_valid_certificate()
         if not encrypted_certificate_data:
-            logger.error("No valid certificate in database.")
+            logger.warning("No valid certificate in database found.")
             return False
         else:
             decrypted_certificate_data = cipher_suite.decrypt(encrypted_certificate_data)
@@ -98,6 +98,7 @@ def check_certificate_validity() -> bool:
                 logger.error("Certificate in database looks corrupted after decryption.")
                 return False
 
-    except Exception:
-        logger.error(f"An error occurred while checking the certificate.")
+    except Exception as e:
+        logger.error(f"An error occurred while checking the certificate: {e}")
         return False
+        # sys.exit(1)

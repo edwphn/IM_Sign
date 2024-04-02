@@ -8,3 +8,4 @@ pyodbc
 aiofiles
 python-multipart
 PyPDF2
+starlette
