@@ -1,6 +1,6 @@
-### Clients requests examples
+### Client requests examples
 
-GET http://127.0.0.1:8000/get_signed/9d60844a-85b0-4aa2-bcd2-9e28d4590503
+GET http://127.0.0.1:8000/get_signed/A144AE61-1995-4628-A794-CAB5192A9CAA
 
 ###
 POST http://127.0.0.1:8000/sign
