@@ -2,7 +2,6 @@
 
 """Module for maintenance purpose."""
 import os
-import datetime
 import sys
 from config_loader import config_vars, SCRIPT_DIR
 from log_sett import logger
@@ -37,7 +36,7 @@ def check_certificate(first_attempt=True) -> None:
         logger.success("Certificate is valid. Program can start now.")
 
 
-def maintenance() -> None:
+def init_maintenance() -> None:
     logger.info("Initializing maintenance.")
     check_certificate()
     check_directories()

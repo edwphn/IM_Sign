@@ -1,53 +1,21 @@
-2024-04-02 15:44:37 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 15:44:37 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 15:44:38 INFO _database.py:74 Checking database table existence.
-2024-04-02 15:50:33 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 15:50:33 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 15:50:33 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:03:52 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:03:52 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:03:52 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:05:06 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:05:06 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:05:10 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:05:10 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:05:10 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:05:31 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:05:31 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:05:33 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:05:33 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:05:33 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:05:43 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:05:43 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:05:46 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:05:46 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:05:46 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:06:05 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:06:05 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:06:07 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:06:07 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:06:08 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:11:29 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:11:29 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:11:29 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:13:36 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:13:36 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:13:36 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:19:35 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:19:35 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:19:35 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:22:43 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:22:43 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:22:43 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:24:40 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:24:40 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:24:40 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:31:30 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:31:30 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:31:30 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:32:51 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:32:51 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:32:51 INFO _database.py:74 Checking database table existence.
-2024-04-02 16:43:36 INFO config_loader.py:10 Loading configuration settings.
-2024-04-02 16:43:36 SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-02 16:43:36 INFO _database.py:74 Checking database table existence.
+2024-04-03 16:22:07 	INFO config_loader.py:10 Loading configuration settings.
+2024-04-03 16:22:07 	SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-03 16:22:08 	INFO maintenance.py:41 Initializing maintenance.
+2024-04-03 16:22:08 	WARNING _certificate.py:95 Certificate expires on: 2024-10-13 17:03:57+00:00.
+2024-04-03 16:22:08 	SUCCESS maintenance.py:37 Certificate is valid. Program can start now.
+2024-04-03 16:22:08 	INFO maintenance.py:18 Temporary folder found.
+2024-04-03 16:22:08 	INFO _database.py:74 Checking database table existence.
+2024-04-03 16:31:34 	INFO config_loader.py:10 Loading configuration settings.
+2024-04-03 16:31:34 	SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-03 16:31:35 	INFO maintenance.py:40 Initializing maintenance.
+2024-04-03 16:31:36 	WARNING _certificate.py:95 Certificate expires on: 2024-10-13 17:03:57+00:00.
+2024-04-03 16:31:36 	SUCCESS maintenance.py:36 Certificate is valid. Program can start now.
+2024-04-03 16:31:36 	INFO maintenance.py:17 Temporary folder found.
+2024-04-03 16:31:36 	INFO _database.py:74 Checking database table existence.
+2024-04-03 16:36:34 	INFO config_loader.py:10 Loading configuration settings.
+2024-04-03 16:36:34 	SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-03 16:36:35 	INFO maintenance.py:40 Initializing maintenance.
+2024-04-03 16:36:36 	WARNING _certificate.py:95 Certificate expires on: 2024-10-13 17:03:57+00:00.
+2024-04-03 16:36:36 	SUCCESS maintenance.py:36 Certificate is valid. Program can start now.
+2024-04-03 16:36:36 	INFO maintenance.py:17 Temporary folder found.
+2024-04-03 16:36:36 	INFO _database.py:74 Checking database table existence.
