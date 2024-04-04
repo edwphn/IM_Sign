@@ -1,4 +1,4 @@
-# _certificate.py
+# _cert.py
 
 import os
 import sys
@@ -11,6 +11,7 @@ from config_loader import config_vars
 from log_sett import logger
 
 
+decrypted_certificate_data = None
 folder_path = config_vars['DIRECTORIES']['CERTIFICATE']
 encryption_key = config_vars['ENCRYPTION']['KEY']
 
@@ -23,13 +24,13 @@ def encrypt_certificate(file_path):
     return cipher_suite.encrypt(certificate_data)
 
 
-def get_certificate_metadata(cert_data):
+def extract_certificate(cert_data):
     try:
         private_key, certificate, additional_certificates = pkcs12.load_key_and_certificates(
             cert_data, '123456'.encode(), default_backend()
         )
 
-        return certificate.not_valid_after_utc, certificate.issuer.rfc4514_string(), certificate.subject.rfc4514_string()
+        return private_key, certificate
 
     except Exception as e:
         logger.critical(f"An error occurred: {e}")
@@ -45,7 +46,11 @@ def load_certificates_from_disk() -> None:
                 pfx_data = f.read()
 
             try:
-                expiration, issuer, subject = get_certificate_metadata(pfx_data)
+                extracted_private_key, extracted_certificate = extract_certificate(pfx_data)
+
+                expiration = extracted_certificate.not_valid_after_utc,
+                issuer = extracted_certificate.issuer.rfc4514_string(),
+                subject = extracted_certificate.subject.rfc4514_string()
             except Exception as e:
                 logger.critical(f"An error occurred while processing certificate {filename}: {e}")
                 continue
@@ -73,6 +78,7 @@ def get_latest_valid_certificate():
 
 
 def check_certificate_validity() -> bool:
+    global decrypted_certificate_data
     try:
         encrypted_certificate_data = get_latest_valid_certificate()
         if not encrypted_certificate_data:
@@ -80,10 +86,7 @@ def check_certificate_validity() -> bool:
             return False
         else:
             decrypted_certificate_data = cipher_suite.decrypt(encrypted_certificate_data)
-
-            private_key, certificate, additional_certificates = pkcs12.load_key_and_certificates(
-                decrypted_certificate_data, b'123456', default_backend()
-            )
+            certificate = extract_certificate(decrypted_certificate_data)[1]
 
             if certificate:
                 not_valid_after_utc = certificate.not_valid_after.astimezone(timezone.utc)
@@ -101,4 +104,49 @@ def check_certificate_validity() -> bool:
     except Exception as e:
         logger.error(f"An error occurred while checking the certificate: {e}")
         return False
-        # sys.exit(1)
+
+
+# TODO - Сделать класс по управлению сертификатами
+# class Certificate:
+#     def __init__(self, name, db_connection, disk_path):
+#         self.name = name
+#         self.private_key = None
+#         self.certificate = None
+#         self.issuer = None
+#         self.expiration_date = None
+#         self.subject = None
+#         self.db_connection = db_connection
+#         self.disk_path = disk_path
+#
+#         if not self.load_from_db():
+#             if not self.load_from_disk():
+#                 raise ValueError("Unable to load a valid certificate.")
+#
+#     def load_from_db(self):
+#         """Загружает сертификат из БД. Возвращает True, если загрузка успешна."""
+#         # Здесь реализация загрузки сертификата из БД
+#         # Пример: self.certificate = db_connection.get_certificate(self.name)
+#         # После загрузки проверяем валидность
+#         return self.check_validity()
+#
+#     def load_from_disk(self):
+#         """Загружает сертификат с диска. Возвращает True, если загрузка успешна."""
+#         # Здесь реализация загрузки сертификата с диска
+#         # Пример: self.certificate = load_certificate_from_path(self.disk_path)
+#         # После загрузки проверяем валидность и загружаем в БД
+#         if self.check_validity():
+#             self.upload_to_db()
+#             return True
+#         return False
+#
+#     def check_validity(self):
+#         """Проверяет сертификат на валидность. Возвращает True, если сертификат валиден."""
+#         # Здесь реализация проверки валидности
+#         # Можно проверить expiration_date и другие параметры
+#         return True
+#
+#     def upload_to_db(self):
+#         """Загружает валидный сертификат в БД."""
+#         # Здесь реализация загрузки сертификата в БД
+#         pass
+

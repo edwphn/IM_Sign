@@ -1,21 +1,29 @@
-2024-04-03 16:22:07 	INFO config_loader.py:10 Loading configuration settings.
-2024-04-03 16:22:07 	SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-03 16:22:08 	INFO maintenance.py:41 Initializing maintenance.
-2024-04-03 16:22:08 	WARNING _certificate.py:95 Certificate expires on: 2024-10-13 17:03:57+00:00.
-2024-04-03 16:22:08 	SUCCESS maintenance.py:37 Certificate is valid. Program can start now.
-2024-04-03 16:22:08 	INFO maintenance.py:18 Temporary folder found.
-2024-04-03 16:22:08 	INFO _database.py:74 Checking database table existence.
-2024-04-03 16:31:34 	INFO config_loader.py:10 Loading configuration settings.
-2024-04-03 16:31:34 	SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-03 16:31:35 	INFO maintenance.py:40 Initializing maintenance.
-2024-04-03 16:31:36 	WARNING _certificate.py:95 Certificate expires on: 2024-10-13 17:03:57+00:00.
-2024-04-03 16:31:36 	SUCCESS maintenance.py:36 Certificate is valid. Program can start now.
-2024-04-03 16:31:36 	INFO maintenance.py:17 Temporary folder found.
-2024-04-03 16:31:36 	INFO _database.py:74 Checking database table existence.
-2024-04-03 16:36:34 	INFO config_loader.py:10 Loading configuration settings.
-2024-04-03 16:36:34 	SUCCESS config_loader.py:55 Settings have been loaded.
-2024-04-03 16:36:35 	INFO maintenance.py:40 Initializing maintenance.
-2024-04-03 16:36:36 	WARNING _certificate.py:95 Certificate expires on: 2024-10-13 17:03:57+00:00.
-2024-04-03 16:36:36 	SUCCESS maintenance.py:36 Certificate is valid. Program can start now.
-2024-04-03 16:36:36 	INFO maintenance.py:17 Temporary folder found.
-2024-04-03 16:36:36 	INFO _database.py:74 Checking database table existence.
+2024-04-04 14:13:52 	INFO config_loader.py:10 Loading configuration settings.
+2024-04-04 14:13:52 	SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-04 14:13:52 	INFO maintenance.py:40 Initializing maintenance.
+2024-04-04 14:13:53 	WARNING _cert.py:98 Certificate expires on: 2024-10-13 17:03:57+00:00.
+2024-04-04 14:13:53 	SUCCESS maintenance.py:36 Certificate is valid. Program can start now.
+2024-04-04 14:13:53 	INFO maintenance.py:17 Temporary folder found.
+2024-04-04 14:13:53 	INFO main.py:100 Starting FastAPI server
+2024-04-04 14:13:53 	INFO _database.py:74 Checking database table existence.
+2024-04-04 14:14:06 	DEBUG main.py:95 Status for 945f5c6c-c2d2-4a36-b0c9-00f847949f40 is ('Received', 'Received file from the client')
+2024-04-04 14:15:38 	DEBUG main.py:95 Status for 945f5c6c-c2d2-4a36-b0c9-00f847949f40 is ('Received', 'Received file from the client')
+2024-04-04 14:15:59 	DEBUG main.py:95 Status for 945f5c6c-c2d2-4a36-b0c9-00f847949f40 is ('Received', 'Received file from the client')
+2024-04-04 14:16:56 	INFO config_loader.py:10 Loading configuration settings.
+2024-04-04 14:16:56 	SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-04 14:16:56 	INFO maintenance.py:40 Initializing maintenance.
+2024-04-04 14:16:56 	WARNING _cert.py:98 Certificate expires on: 2024-10-13 17:03:57+00:00.
+2024-04-04 14:16:56 	SUCCESS maintenance.py:36 Certificate is valid. Program can start now.
+2024-04-04 14:16:56 	INFO maintenance.py:17 Temporary folder found.
+2024-04-04 14:16:56 	INFO main.py:100 Starting FastAPI server
+2024-04-04 14:16:56 	INFO _database.py:74 Checking database table existence.
+2024-04-04 14:17:58 	DEBUG main.py:95 Status for 945f5c6c-c2d2-4a36-b0c9-00f847949f40 is ('Received', 'Received file from the client')
+2024-04-04 14:20:01 	INFO config_loader.py:10 Loading configuration settings.
+2024-04-04 14:20:01 	SUCCESS config_loader.py:55 Settings have been loaded.
+2024-04-04 14:20:02 	INFO maintenance.py:40 Initializing maintenance.
+2024-04-04 14:20:02 	WARNING _cert.py:98 Certificate expires on: 2024-10-13 17:03:57+00:00.
+2024-04-04 14:20:02 	SUCCESS maintenance.py:36 Certificate is valid. Program can start now.
+2024-04-04 14:20:02 	INFO maintenance.py:17 Temporary folder found.
+2024-04-04 14:20:02 	INFO main.py:100 Starting FastAPI server
+2024-04-04 14:20:02 	INFO _database.py:74 Checking database table existence.
+2024-04-04 14:20:09 	WARNING main.py:72 UUID: 945f5c6c-c2d2-4a36-b0c9-00f847949f40 - Transmitted to the client.

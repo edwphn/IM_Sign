@@ -5,7 +5,7 @@ import os
 import sys
 from config_loader import config_vars, SCRIPT_DIR
 from log_sett import logger
-from _certificate import check_certificate_validity, load_certificates_from_disk
+from _cert import check_certificate_validity, load_certificates_from_disk
 
 
 def check_directories() -> None:

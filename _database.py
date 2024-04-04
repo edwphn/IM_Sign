@@ -26,7 +26,7 @@ VALUES (?, ?, ?, ?)
 """
 
 check_file_status = """
-SELECT Status, Message FROM DocumentsHistory WHERE UUID = ?
+SELECT TOP 1 Status, Message FROM DocumentsHistory WHERE UUID = ? ORDER BY ID DESC
 """
 
 

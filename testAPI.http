@@ -1,6 +1,6 @@
 ### Client requests examples
 
-GET http://127.0.0.1:8000/get_signed/A144AE61-1995-4628-A794-CAB5192A9CAA
+GET http://127.0.0.1:8000/get_signed/945f5c6c-c2d2-4a36-b0c9-00f847949f40
 
 ###
 POST http://127.0.0.1:8000/sign
@@ -8,4 +8,4 @@ Content-Type: application/octet-stream
 sender: Ben Laden
 purpose: regular
 
-< C:\Users\pisarev\Desktop\tmp\invoice.pdf
+< /home/ed/Documents/Pepi%20gril%205-10.pdf

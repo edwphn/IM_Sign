@@ -1,7 +1,6 @@
 # main.py
-#
-import os
 
+import os
 from log_sett import logger
 from fastapi import FastAPI, BackgroundTasks, Header, Request, HTTPException
 from fastapi.responses import JSONResponse
@@ -11,8 +10,7 @@ from datetime import datetime, timezone
 import _database
 from maintenance import init_maintenance
 from validators import validate_file, sanitize_input
-import aiofiles
-from _sign_pdf import sign_flow
+from sign_handler import sign_flow
 from config_loader import config_vars
 
 # Maintenance on startup
@@ -35,12 +33,23 @@ async def sign(
     logger.info(f"Generated UUID for the file: {file_uuid}. Sender: {sender}. Purpose: {purpose}")
 
     content = await request.body()
+    now = datetime.now(timezone.utc)
+    file_size = len(content)
 
     # Validate the file
     is_valid = await validate_file(content)
     if not is_valid:
         logger.warning(f"File validation failed for UUID: {file_uuid}")
         raise HTTPException(status_code=400, detail="Invalid file. Check the file integrity or size limit.")
+
+    try:
+        await _database.execute_sql(_database.insert_Documents, (file_uuid, now, None, None, file_size, now, sender))
+        await _database.execute_sql(_database.insert_DocumentsHistory, (file_uuid, 'Received', 'Received file from the client', now))
+        logger.success(f"Insert new document UUID: {file_uuid} into database.")
+    except Exception as e:
+        msg = f"Database operation failed for UUID: {file_uuid}. Error: {e}"
+        logger.error(msg)
+        raise HTTPException(status_code=500, headers={"Task-Status": "Failed"}, detail=msg)
 
     # Send the file to the signing flow
     background_tasks.add_task(sign_flow, content, file_uuid)
@@ -55,7 +64,7 @@ async def get_signed(file_uuid: str):
         logger.warning(f'UUID: {file_uuid} - No such UUID in database.')
         raise HTTPException(status_code=404, detail="No such UUID in database.")
 
-    elif status[0] == 'Signed':
+    elif status[0] == 'Saved':
         file_path = f"{config_vars['DIRECTORIES']['TEMP']}/{file_uuid}.pdf"
         if not os.path.exists(file_path):
             logger.warning(f'UUID: {file_uuid} - Can\'t locate file on disk.')
@@ -83,6 +92,7 @@ async def get_signed(file_uuid: str):
         )
 
     else:
+        logger.debug(f'Status for {file_uuid} is {status}')
         raise HTTPException(status_code=404, detail="Unexpected status")
 
 
