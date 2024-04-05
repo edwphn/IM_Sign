@@ -2,43 +2,27 @@
 
 import pyodbc
 import asyncio
-from functools import partial
-from config_loader import config_vars
 from log_sett import logger
+from functools import partial
+from _config import DB_SERVER_URL, DB_NAME, DB_USER, DB_PASSWORD
 
 
-connection_string = 'DRIVER={ODBC Driver 17 for SQL Server};' \
-                    f'SERVER={config_vars["DATABASE"]["SERVER"]};' \
-                    f'DATABASE={config_vars["DATABASE"]["NAME"]};' \
-                    f'UID={config_vars["DATABASE"]["USER"]};' \
-                    f'PWD={config_vars["DATABASE"]["PASSWORD"]}'
+CONNECTION_STRING = 'DRIVER={ODBC Driver 17 for SQL Server};' \
+                    f'SERVER={DB_SERVER_URL};' \
+                    f'DATABASE={DB_NAME};' \
+                    f'UID={DB_USER};' \
+                    f'PWD={DB_PASSWORD}'
 
 
-# -------------- queries templates -------------
-insert_Documents = """
-INSERT INTO Documents (UUID, SignTimestamp, FileName, OriginalDocId, FileSize, RecordTime, Sender)
-VALUES (?, ?, ?, ?, ?, ?, ?)
-"""
-
-insert_DocumentsHistory = """
-INSERT INTO DocumentsHistory (UUID, Status, Message, RecordTime)
-VALUES (?, ?, ?, ?)
-"""
-
-check_file_status = """
-SELECT TOP 1 Status, Message FROM DocumentsHistory WHERE UUID = ? ORDER BY ID DESC
-"""
-
-
-# ------------- Async query mechanism --------------
+# -------------- Async query mechanism --------------
 async def execute_sql_from_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         sql_command = file.read()
-        await execute_sql(sql_command)
+        await execute_query(sql_command)
 
 
 async def fetch_sql(sql, params=None):
-    connection = pyodbc.connect(connection_string, autocommit=True)
+    connection = pyodbc.connect(CONNECTION_STRING, autocommit=True)
     results = []
     try:
         with connection.cursor() as cursor:
@@ -57,8 +41,8 @@ async def run_in_executor(func, *args):
     return await loop.run_in_executor(None, partial(func, *args))
 
 
-async def execute_sql(sql, params=None):
-    connection = pyodbc.connect(connection_string, autocommit=True)
+async def execute_query(sql, params=None):
+    connection = pyodbc.connect(CONNECTION_STRING, autocommit=True)
     try:
         with connection.cursor() as cursor:
             if params:
@@ -69,37 +53,23 @@ async def execute_sql(sql, params=None):
         connection.close()
 
 
-# ------- part of maintenance ---------
-async def create_tables():
-    logger.info("Checking database table existence.")
-    await execute_sql_from_file('create_Documents.sql')
-    await execute_sql_from_file('create_DocumentsHistory.sql')
-
-
-# ---- Sync queries ----
+# -------------- Sync queries --------------
 def execute_sql_sync(sql, params=None):
     try:
-        connection = pyodbc.connect(connection_string, autocommit=True)
-
+        with pyodbc.connect(CONNECTION_STRING, autocommit=True) as connection:
+            with connection.cursor() as cursor:
+                if params:
+                    cursor.execute(sql, params)
+                else:
+                    cursor.execute(sql)
     except pyodbc.Error as e:
-        print(f"Error connecting to the database: {e}")
+        logger.error(f"Error executing SQL command: {e}")
         raise
 
+
+def fetch_sql_sync(sql):
     try:
-        cursor = connection.cursor()
-        if params is not None:
-            cursor.execute(sql, params)
-        else:
-            cursor.execute(sql)
-
-    finally:
-        cursor.close()
-        connection.close()
-
-
-def execute_sql_select_sync(sql):
-    try:
-        connection = pyodbc.connect(connection_string, autocommit=True)
+        connection = pyodbc.connect(CONNECTION_STRING, autocommit=True)
         cursor = connection.cursor()
         cursor.execute(sql)
         results = cursor.fetchall()
@@ -114,3 +84,65 @@ def execute_sql_select_sync(sql):
             cursor.close()
         if connection:
             connection.close()
+
+
+# -------------- queries templates --------------
+insert_Documents = """
+INSERT INTO Documents (UUID, SignTimestamp, FileName, OriginalDocId, FileSize, RecordTime, Sender)
+VALUES (?, ?, ?, ?, ?, ?, ?)
+"""
+
+insert_DocumentsHistory = """
+INSERT INTO DocumentsHistory (UUID, Status, Message, RecordTime)
+VALUES (?, ?, ?, ?)
+"""
+
+check_file_status = """
+SELECT TOP 1 Status, Message FROM DocumentsHistory WHERE UUID = ? ORDER BY ID DESC
+"""
+
+create_Documents = """
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Documents' AND type = 'U')
+BEGIN
+    CREATE TABLE Documents (
+        ID INT IDENTITY(1,1) PRIMARY KEY,
+        UUID uniqueidentifier NOT NULL UNIQUE,
+        SignTimestamp DATETIME2 NULL,
+        FileName NVARCHAR(500) NULL,
+        OriginalDocId NVARCHAR(500) NULL,
+        FileSize INT NULL,
+        RecordTime DATETIME NOT NULL DEFAULT GETDATE(),
+        Sender NVARCHAR(255) NULL
+    );
+END
+"""
+
+create_DocumentsHistory = """
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'DocumentsHistory' AND type = 'U')
+AND EXISTS (SELECT * FROM sys.tables WHERE name = 'Documents' AND type = 'U')
+BEGIN
+    CREATE TABLE DocumentsHistory (
+        ID INT IDENTITY(1,1) PRIMARY KEY,
+        UUID uniqueidentifier NOT NULL,
+        Status NVARCHAR(50) NOT NULL,
+        Message NVARCHAR(MAX) NULL,
+        RecordTime DATETIME NOT NULL DEFAULT GETDATE(),
+        FOREIGN KEY (UUID) REFERENCES Documents(UUID)
+    );
+END
+"""
+
+create_Certificates = """
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Certificates' AND type = 'U')
+BEGIN
+    CREATE TABLE Certificates (
+        ID INT IDENTITY(1,1) PRIMARY KEY,
+        Valid BIT NOT NULL,
+        Expiration DATETIME NOT NULL,
+        Issuer NVARCHAR(MAX) NULL,
+        Subject NVARCHAR(MAX) NULL,
+        RecordTime DATETIME NOT NULL DEFAULT GETDATE(),
+        CertificateData VARBINARY(MAX)
+    );
+END
+"""

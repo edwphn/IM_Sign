@@ -1,21 +1,18 @@
 # _cert.py
 
 import os
-import sys
 from datetime import datetime, timezone
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.serialization import pkcs12
 from cryptography.fernet import Fernet
-from _database import execute_sql_sync, execute_sql_select_sync
-from config_loader import config_vars
+from _database import execute_sql_sync, fetch_sql_sync
+from _config import DIR_CERTIFICATE, ENCRYPTION_KEY
 from log_sett import logger
 
 
 decrypted_certificate_data = None
-folder_path = config_vars['DIRECTORIES']['CERTIFICATE']
-encryption_key = config_vars['ENCRYPTION']['KEY']
 
-cipher_suite = Fernet(encryption_key)
+cipher_suite = Fernet(ENCRYPTION_KEY)
 
 
 def encrypt_certificate(file_path):
@@ -37,11 +34,11 @@ def extract_certificate(cert_data):
 
 
 def load_certificates_from_disk() -> None:
-    for filename in os.listdir(folder_path):
+    for filename in os.listdir(DIR_CERTIFICATE):
         if filename.endswith('.pfx'):
             logger.info(f"Found certificate: {filename}")
 
-            file_path = os.path.join(folder_path, filename)
+            file_path = os.path.join(DIR_CERTIFICATE, filename)
             with open(file_path, 'rb') as f:
                 pfx_data = f.read()
 
@@ -71,7 +68,7 @@ def load_certificates_from_disk() -> None:
 
 def get_latest_valid_certificate():
     sql_query = "SELECT TOP 1 CertificateData FROM dbo.Certificates WHERE Valid = 1 ORDER BY RecordTime DESC"
-    encrypted_data_row = execute_sql_select_sync(sql_query)
+    encrypted_data_row = fetch_sql_sync(sql_query)
     if not encrypted_data_row:
         raise ValueError("No valid certificates found in the database.")
     return encrypted_data_row[0][0]

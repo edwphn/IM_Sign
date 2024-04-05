@@ -1,28 +1,41 @@
 # maintenance.py
 
-"""Module for maintenance purpose."""
+""" Module for maintenance purpose. """
 import os
 import sys
-from config_loader import config_vars, SCRIPT_DIR
 from log_sett import logger
+from _config import DIR_TEMP
+from _database import execute_sql_sync, create_Documents, create_DocumentsHistory
 from _cert import check_certificate_validity, load_certificates_from_disk
 
 
 def check_directories() -> None:
-    file_directory = SCRIPT_DIR + config_vars["DIRECTORIES"]["TEMP"]
-    if not os.path.exists(file_directory):
-        os.makedirs(file_directory)
-        logger.info("Temporary directory created.")
+    if not DIR_TEMP:
+        logger.critical('Missing temporary folder in config.')
+        sys.exit(1)
     else:
-        logger.info("Temporary folder found.")
+        if not os.path.exists(DIR_TEMP):
+            os.makedirs(DIR_TEMP)
+            logger.info('Temporary directory created.')
+        else:
+            logger.info('Temporary directory found.')
 
 
-def check_certificate(first_attempt=True) -> None:
+def create_tables() -> None:
+    logger.info('Checking database table existence.')
+    try:
+        execute_sql_sync(create_Documents)
+        execute_sql_sync(create_DocumentsHistory)
+    except Exception as e:
+        logger.error(f"An error occurred while creating tables: {e}")
+
+
+def check_certificates(first_attempt=True) -> None:
     valid_cert = check_certificate_validity()
 
     if not valid_cert:
         if not first_attempt:
-            logger.critical("Couldn't load certificate from filesystem. Terminating program.")
+            logger.critical('Couldn\'t load certificate from filesystem. Terminating program.')
             sys.exit(1)
         else:
             try:
@@ -34,9 +47,3 @@ def check_certificate(first_attempt=True) -> None:
             check_certificate(first_attempt=False)
     else:
         logger.success("Certificate is valid. Program can start now.")
-
-
-def init_maintenance() -> None:
-    logger.info("Initializing maintenance.")
-    check_certificate()
-    check_directories()
