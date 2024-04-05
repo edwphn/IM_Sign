@@ -6,7 +6,7 @@ import aiofiles
 import _cert
 import _database
 from log_sett import logger
-from config_loader import config_vars
+from _config import config_vars
 
 
 class SignTime:
@@ -28,10 +28,12 @@ async def save_signed_file(file_content, file_uuid):
         async with aiofiles.open(file_path, 'wb') as file:
             await file.write(file_content)
     except IOError as e:
-        await _database.execute_sql(_database.insert_DocumentsHistory, (file_uuid, 'Failed', 'Failed to save signed file to the filesystem', now))
+        await _database.execute_query(_database.insert_DocumentsHistory,
+                                      (file_uuid, 'Failed', 'Failed to save signed file to the filesystem', now))
         logger.error(f"Failed to save signed file {file_uuid}. Error: {e}")
     else:
-        await _database.execute_sql(_database.insert_DocumentsHistory, (file_uuid, 'Saved', 'Signed file saved successfully', now))
+        await _database.execute_query(_database.insert_DocumentsHistory,
+                                      (file_uuid, 'Saved', 'Signed file saved successfully', now))
         logger.info(f"Signed file saved successfully: {file_uuid}")
 
 
@@ -59,7 +61,7 @@ async def sign_pdf(file_uuid, data, pfx_data):
         raise
     else:
         now = datetime.now(timezone.utc)
-        await _database.execute_sql(_database.insert_DocumentsHistory, (file_uuid, 'Signed', 'File was signed', now))
+        await _database.execute_query(_database.insert_DocumentsHistory, (file_uuid, 'Signed', 'File was signed', now))
 
     return data + signature
 

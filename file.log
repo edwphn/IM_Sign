@@ -27,3 +27,10 @@
 2024-04-04 14:20:02 	INFO main.py:100 Starting FastAPI server
 2024-04-04 14:20:02 	INFO _database.py:74 Checking database table existence.
 2024-04-04 14:20:09 	WARNING main.py:72 UUID: 945f5c6c-c2d2-4a36-b0c9-00f847949f40 - Transmitted to the client.
+2024-04-05 13:43:23 	INFO temp_2.py:10 Loading configuration settings.
+2024-04-05 13:58:46 	INFO _config.py:9 Loading configuration settings.
+2024-04-05 13:58:46 	SUCCESS _config.py:42 Settings have been loaded.
+2024-04-05 14:01:58 	INFO _config.py:9 Loading configuration settings.
+2024-04-05 14:01:58 	SUCCESS _config.py:42 Settings have been loaded.
+2024-04-05 14:02:11 	INFO _config.py:9 Loading configuration settings.
+2024-04-05 14:02:11 	SUCCESS _config.py:42 Settings have been loaded.

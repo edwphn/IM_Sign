@@ -2,22 +2,25 @@
 
 import os
 from log_sett import logger
+from _config import DIR_TEMP
+import maintenance
 from fastapi import FastAPI, BackgroundTasks, Header, Request, HTTPException
 from fastapi.responses import JSONResponse
 from starlette.responses import FileResponse
 import uuid
 from datetime import datetime, timezone
 import _database
-from maintenance import init_maintenance
 from validators import validate_file, sanitize_input
 from sign_handler import sign_flow
-from config_loader import config_vars
 
-# Maintenance on startup
-init_maintenance()
 
 app = FastAPI()
-app.add_event_handler("startup", _database.create_tables)
+
+# Maintenance on startup
+logger.info("Initializing maintenance.")
+app.add_event_handler("startup", maintenance.check_directories)
+app.add_event_handler("startup", maintenance.create_tables)
+app.add_event_handler("startup", maintenance.check_certificates)
 
 
 @app.post("/sign")
@@ -43,8 +46,9 @@ async def sign(
         raise HTTPException(status_code=400, detail="Invalid file. Check the file integrity or size limit.")
 
     try:
-        await _database.execute_sql(_database.insert_Documents, (file_uuid, now, None, None, file_size, now, sender))
-        await _database.execute_sql(_database.insert_DocumentsHistory, (file_uuid, 'Received', 'Received file from the client', now))
+        await _database.execute_query(_database.insert_Documents, (file_uuid, now, None, None, file_size, now, sender))
+        await _database.execute_query(_database.insert_DocumentsHistory,
+                                      (file_uuid, 'Received', 'Received file from the client', now))
         logger.success(f"Insert new document UUID: {file_uuid} into database.")
     except Exception as e:
         msg = f"Database operation failed for UUID: {file_uuid}. Error: {e}"
@@ -65,7 +69,7 @@ async def get_signed(file_uuid: str):
         raise HTTPException(status_code=404, detail="No such UUID in database.")
 
     elif status[0] == 'Saved':
-        file_path = f"{config_vars['DIRECTORIES']['TEMP']}/{file_uuid}.pdf"
+        file_path = f"{DIR_TEMP}/{file_uuid}.pdf"
         if not os.path.exists(file_path):
             logger.warning(f'UUID: {file_uuid} - Can\'t locate file on disk.')
             raise HTTPException(status_code=404, detail="Oooops! File was lost.", headers={"Task-Status": "Failed"})
