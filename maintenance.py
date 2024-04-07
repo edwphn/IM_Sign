@@ -44,6 +44,6 @@ def check_certificates(first_attempt=True) -> None:
             except Exception as e:
                 logger.critical(f"Failed to load certificates from filesystem: {e}")
                 sys.exit(1)
-            check_certificate(first_attempt=False)
+            check_certificates(first_attempt=False)
     else:
         logger.success("Certificate is valid. Program can start now.")

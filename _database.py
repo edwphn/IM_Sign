@@ -15,12 +15,6 @@ CONNECTION_STRING = 'DRIVER={ODBC Driver 17 for SQL Server};' \
 
 
 # -------------- Async query mechanism --------------
-async def execute_sql_from_file(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        sql_command = file.read()
-        await execute_query(sql_command)
-
-
 async def fetch_sql(sql, params=None):
     connection = pyodbc.connect(CONNECTION_STRING, autocommit=True)
     results = []
@@ -67,23 +61,15 @@ def execute_sql_sync(sql, params=None):
         raise
 
 
-def fetch_sql_sync(sql):
+def fetch_sql_sync(sql, params=None):
     try:
-        connection = pyodbc.connect(CONNECTION_STRING, autocommit=True)
-        cursor = connection.cursor()
-        cursor.execute(sql)
-        results = cursor.fetchall()
-        return results
-
+        with pyodbc.connect(CONNECTION_STRING, autocommit=True) as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(sql, params) if params else cursor.execute(sql)
+                return cursor.fetchall() if cursor.description else None
     except pyodbc.Error as e:
-        logger.error(f'Error executing SQL SELECT operation: {e}')
+        logger.error(f"Error executing SQL command: {e}")
         raise
-
-    finally:
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
 
 
 # -------------- queries templates --------------
@@ -114,7 +100,7 @@ BEGIN
         RecordTime DATETIME NOT NULL DEFAULT GETDATE(),
         Sender NVARCHAR(255) NULL
     );
-END
+END 
 """
 
 create_DocumentsHistory = """
