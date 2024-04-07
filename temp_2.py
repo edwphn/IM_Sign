@@ -1,6 +1,8 @@
-# Read configuration
-try:
-    config.read(CONFIG_FILE)
-except configparser.Error as e:
-    logger.error(f"Error reading configuration file: {e}")
-    sys.exit(1)
+from _database import fetch_sql_sync
+
+query = "SELECT * FROM DocumentsHistory WHERE UUID = '7001697E-A8FF-4572-A9D1-A5CF86D9CAAE'"
+
+result = fetch_sql_sync(query)
+
+for row in result:
+    print(row)

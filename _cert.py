@@ -1,6 +1,7 @@
 # _cert.py
 
 import os
+import sys
 from datetime import datetime, timezone
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.serialization import pkcs12
@@ -8,7 +9,6 @@ from cryptography.fernet import Fernet
 from _database import execute_sql_sync, fetch_sql_sync
 from _config import DIR_CERTIFICATE, ENCRYPTION_KEY
 from log_sett import logger
-
 
 decrypted_certificate_data = None
 
@@ -103,47 +103,104 @@ def check_certificate_validity() -> bool:
         return False
 
 
-# TODO - Сделать класс по управлению сертификатами
-# class Certificate:
-#     def __init__(self, name, db_connection, disk_path):
-#         self.name = name
-#         self.private_key = None
-#         self.certificate = None
-#         self.issuer = None
-#         self.expiration_date = None
-#         self.subject = None
-#         self.db_connection = db_connection
-#         self.disk_path = disk_path
-#
-#         if not self.load_from_db():
-#             if not self.load_from_disk():
-#                 raise ValueError("Unable to load a valid certificate.")
-#
-#     def load_from_db(self):
-#         """Загружает сертификат из БД. Возвращает True, если загрузка успешна."""
-#         # Здесь реализация загрузки сертификата из БД
-#         # Пример: self.certificate = db_connection.get_certificate(self.name)
-#         # После загрузки проверяем валидность
-#         return self.check_validity()
-#
-#     def load_from_disk(self):
-#         """Загружает сертификат с диска. Возвращает True, если загрузка успешна."""
-#         # Здесь реализация загрузки сертификата с диска
-#         # Пример: self.certificate = load_certificate_from_path(self.disk_path)
-#         # После загрузки проверяем валидность и загружаем в БД
-#         if self.check_validity():
-#             self.upload_to_db()
-#             return True
-#         return False
-#
-#     def check_validity(self):
-#         """Проверяет сертификат на валидность. Возвращает True, если сертификат валиден."""
-#         # Здесь реализация проверки валидности
-#         # Можно проверить expiration_date и другие параметры
-#         return True
-#
-#     def upload_to_db(self):
-#         """Загружает валидный сертификат в БД."""
-#         # Здесь реализация загрузки сертификата в БД
-#         pass
+class Certificate:
+    directory = DIR_CERTIFICATE
 
+    def __init__(self, name):
+        self.name = name
+        self.password = '123456'
+        self.cipher_suite = Fernet(ENCRYPTION_KEY)
+        self.pfx_encrypted = None
+        self.pfx_decrypted = None
+        self.private_key = None
+        self.certificate = None
+        self.issuer = None
+        self.expiration_date = None
+        self.subject = None
+        self.file_path = os.path.join(self.directory, f"{self.name}.pfx")
+
+        if not self.get_latest_valid_certificate():
+            logger.warning("No valid certificates in the database. Trying to load new certificate from the disk.")
+            if not self.load_from_disk():
+                logger.critical("Unable to load a valid certificate.")
+                sys.exit(1)
+            else:
+                self.extract_certificate()
+                self.check_validity()
+                self.move_certificate_to_db()
+        else:
+            self._decrypt_data()
+            self.extract_certificate()
+            self.check_validity()
+
+    def get_latest_valid_certificate(self):
+        sql_query = f"""
+        SELECT TOP 1 CertificateData FROM dbo.Certificates WHERE Valid = 1 AND Name = {self.name} ORDER BY ID DESC
+        """
+        results = fetch_sql_sync(sql_query, [self.name])
+        if results:
+            self.pfx_encrypted = results[0][0]
+            return True
+        return False
+
+    def load_from_disk(self) -> bool:
+        if os.path.exists(self.file_path):
+            logger.info(f"Found certificate: {self.file_path}.")
+            try:
+                with open(self.file_path, 'rb') as f:
+                    self.pfx_decrypted = f.read()
+                logger.info(f"Reading certificate {self.name}")
+                return True
+            except (IOError, PermissionError) as e:
+                logger.error(f"Error reading certificate from {self.file_path}: {e}")
+                return False
+        else:
+            logger.warning(f"Certificate file not found: {self.file_path}.")
+            return False
+
+    def extract_certificate(self) -> None:
+        try:
+            self.private_key, self.certificate, additional_certificates = pkcs12.load_key_and_certificates(
+                self.pfx_decrypted, self.password.encode(), default_backend()
+            )
+            self.expiration_date = self.certificate.not_valid_after_utc,
+            self.issuer = self.certificate.issuer.rfc4514_string(),
+            self.subject = self.certificate.subject.rfc4514_string()
+
+            logger.info(f"Expiration: {self.expiration_date}. Issuer: {self.issuer}. Subject: {self.subject}")
+
+        except Exception as e:
+            logger.critical(f"An error occurred: {e}")
+            sys.exit(1)
+
+    def _encrypt_certificate(self) -> bytes:
+        with open(self.file_path, 'rb') as file:
+            certificate_data = file.read()
+        return self.cipher_suite.encrypt(certificate_data)
+
+    def _decrypt_data(self) -> None:
+        try:
+            self.decrypted_data = self.cipher_suite.decrypt(self.pfx_encrypted)
+        except Exception as e:
+            print(f"Decryption error: {e}")
+            sys.exit(1)
+
+    def check_validity(self):
+        if self.expiration_date < datetime.now(timezone.utc):
+            logger.critical("Certificate has expired.")
+            sys.exit(1)
+        logger.warning(f'Certificate {self.name} will expire on: {self.expiration_date}')
+
+    def move_certificate_to_db(self):
+        sql_insert = """
+        INSERT INTO dbo.Certificates (Valid, Expiration, Issuer, Subject, CertificateData)
+        VALUES (?, ?, ?, ?, ?)
+        """
+        pfx_encrypted = self._encrypt_certificate()
+        execute_sql_sync(sql_insert, (1, self.expiration_date, self.issuer, self.subject, pfx_encrypted))
+
+        os.remove(self.file_path)
+        logger.info(f"File {os.path.basename(self.file_path)} was loaded to database and removed from the disk.")
+
+
+cert_CSAT = Certificate('CSAT')
