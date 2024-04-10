@@ -1,4 +1,4 @@
-# log_sett.py
+# _logger.py
 
 import sys
 from loguru import logger

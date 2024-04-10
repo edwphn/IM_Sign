@@ -2,7 +2,7 @@
 
 import pyodbc
 import asyncio
-from log_sett import logger
+from _logger import logger
 from functools import partial
 from _config import DB_SERVER_URL, DB_NAME, DB_USER, DB_PASSWORD
 
@@ -124,6 +124,7 @@ BEGIN
     CREATE TABLE Certificates (
         ID INT IDENTITY(1,1) PRIMARY KEY,
         Valid BIT NOT NULL,
+        CertName NVARCHAR(50) NOT NULL,
         Expiration DATETIME NOT NULL,
         Issuer NVARCHAR(MAX) NULL,
         Subject NVARCHAR(MAX) NULL,

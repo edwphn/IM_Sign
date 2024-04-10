@@ -3,7 +3,7 @@
 import os
 import sys
 import configparser
-from log_sett import logger
+from _logger import logger
 
 
 logger.info('Loading configuration settings.')
@@ -19,7 +19,6 @@ try:
 except configparser.Error as e:
     logger.critical(f"Error reading configuration file: {e}")
     sys.exit(1)
-
 
 try:
     DIR_CERTIFICATE = config['DIRECTORIES']['CERTIFICATE']
