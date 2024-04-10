@@ -1,7 +1,7 @@
 # main.py
 
 import os
-from log_sett import logger
+from _logger import logger
 from _config import DIR_TEMP
 import maintenance
 from fastapi import FastAPI, BackgroundTasks, Header, Request, HTTPException

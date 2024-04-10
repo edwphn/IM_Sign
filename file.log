@@ -1,2 +1,6 @@
 2024-04-07 21:30:24 	INFO _config.py:9 Loading configuration settings.
 2024-04-07 21:30:24 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-10 15:05:02 	INFO temp_2.py:9 Removing file frfrfrr from the disk.
+2024-04-10 15:05:02 	ERROR temp_2.py:13 Problem with deleting file frfrfrr.
+2024-04-10 15:05:21 	INFO temp_2.py:9 Removing file frfrfrr from the disk.
+2024-04-10 15:05:21 	ERROR temp_2.py:13 Problem with deleting file [WinError 2] The system cannot find the file specified: 'frfrfrr'.

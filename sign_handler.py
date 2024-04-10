@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import aiofiles
 import _cert
 import _database
-from log_sett import logger
+from _logger import logger
 from _config import config_vars
 
 
