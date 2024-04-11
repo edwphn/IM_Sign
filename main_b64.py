@@ -39,7 +39,7 @@ async def sign_data(pdf_file: PDFFile):
 
 
 def sign_pdf(input_binary: bytes) -> bytes:
-    with open("load_certificate/certificate.pfx", 'rb') as f:
+    with open("load_certificate/CSAT.pfx", 'rb') as f:
         pfx_data = f.read()
 
     private_key, certificate, additional_certificates = pkcs12.load_key_and_certificates(
