@@ -10,97 +10,8 @@ from _database import execute_sql_sync, fetch_sql_sync
 from _config import DIR_CERTIFICATE, ENCRYPTION_KEY
 from _logger import logger
 
-decrypted_certificate_data = None
 
 cipher_suite = Fernet(ENCRYPTION_KEY)
-
-
-def encrypt_certificate(file_path):
-    with open(file_path, 'rb') as file:
-        certificate_data = file.read()
-    return cipher_suite.encrypt(certificate_data)
-
-
-def extract_certificate(cert_data):
-    try:
-        private_key, certificate, additional_certificates = pkcs12.load_key_and_certificates(
-            cert_data, '123456'.encode(), default_backend()
-        )
-
-        return private_key, certificate
-
-    except Exception as e:
-        logger.critical(f"An error occurred: {e}")
-
-
-def load_certificates_from_disk() -> None:
-    for filename in os.listdir(DIR_CERTIFICATE):
-        if filename.endswith('.pfx'):
-            logger.info(f"Found certificate: {filename}")
-
-            file_path = os.path.join(DIR_CERTIFICATE, filename)
-            with open(file_path, 'rb') as f:
-                pfx_data = f.read()
-
-            try:
-                extracted_private_key, extracted_certificate = extract_certificate(pfx_data)
-
-                expiration = extracted_certificate.not_valid_after_utc,
-                issuer = extracted_certificate.issuer.rfc4514_string(),
-                subject = extracted_certificate.subject.rfc4514_string()
-            except Exception as e:
-                logger.critical(f"An error occurred while processing certificate {filename}: {e}")
-                continue
-
-            encrypted_data = encrypt_certificate(file_path)
-
-            logger.info(f"Expiration: {expiration}. Issuer: {issuer}. Subject: {subject}")
-
-            sql_insert = """
-            INSERT INTO dbo.Certificates (Valid, Expiration, Issuer, Subject, CertificateData)
-            VALUES (?, ?, ?, ?, ?)
-            """
-            execute_sql_sync(sql_insert, (1, expiration, issuer, subject, encrypted_data))
-
-            # os.remove(file_path)
-            logger.info(f"File {os.path.basename(file_path)} was loaded to database and removed from the disk.")
-
-
-def get_latest_valid_certificate():
-    sql_query = "SELECT TOP 1 CertificateData FROM dbo.Certificates WHERE Valid = 1 ORDER BY RecordTime DESC"
-    encrypted_data_row = fetch_sql_sync(sql_query)
-    if not encrypted_data_row:
-        raise ValueError("No valid certificates found in the database.")
-    return encrypted_data_row[0][0]
-
-
-def check_certificate_validity() -> bool:
-    global decrypted_certificate_data
-    try:
-        encrypted_certificate_data = get_latest_valid_certificate()
-        if not encrypted_certificate_data:
-            logger.warning("No valid certificate in database found.")
-            return False
-        else:
-            decrypted_certificate_data = cipher_suite.decrypt(encrypted_certificate_data)
-            certificate = extract_certificate(decrypted_certificate_data)[1]
-
-            if certificate:
-                not_valid_after_utc = certificate.not_valid_after.astimezone(timezone.utc)
-
-                if not_valid_after_utc < datetime.now(timezone.utc):
-                    logger.error("Certificate has expired.")
-                    return False
-                else:
-                    logger.warning(f"Certificate expires on: {not_valid_after_utc}.")
-                    return True
-            else:
-                logger.error("Certificate in database looks corrupted after decryption.")
-                return False
-
-    except Exception as e:
-        logger.error(f"An error occurred while checking the certificate: {e}")
-        return False
 
 
 class Certificate:
@@ -119,7 +30,6 @@ class Certificate:
         self.file_path = os.path.join(self.directory, f"{self.name}.pfx")
 
         if not self.fetch_valid_certificate():
-            logger.warning("No valid certificates in the database. Trying to load new certificate from the disk.")
             if not self.load_from_disk():
                 logger.critical("Unable to load a valid certificate. Terminating program.")
                 sys.exit(1)
@@ -142,9 +52,11 @@ class Certificate:
         if results:
             self.pfx_encrypted = results[0][0]
             return True
+        logger.warning(f"No valid certificates found in the database for {self.name}.")
         return False
 
     def load_from_disk(self) -> bool:
+        logger.info("Trying to load new certificate from the disk.")
         if os.path.exists(self.file_path):
             logger.info(f"Found certificate: {os.path.basename(self.file_path)}.")
             try:
@@ -170,10 +82,11 @@ class Certificate:
             self.subject = self.certificate.subject.rfc4514_string()
 
             logger.info(f"Expiration: {self.expiration}. Issuer: {self.issuer}. Subject: {self.subject}")
-
         except Exception as e:
             logger.critical(f"An error occurred while extracting certificate: {e}")
             sys.exit(1)
+        else:
+            logger.success(f"Certificated {self.name} successfully extracted.")
 
     def _encrypt_certificate(self) -> None:
         try:
