@@ -33,6 +33,3 @@ def create_tables() -> None:
 
 def check_certificates() -> None:
     cert_CSAT = Certificate('CSAT')
-
-
-create_tables()

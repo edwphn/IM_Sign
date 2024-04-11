@@ -27,7 +27,8 @@ try:
     DB_NAME = config['DATABASE']['DB_NAME']
     DB_USER = config['DATABASE']['DB_USER']
     DB_PASSWORD = config['DATABASE']['DB_PASSWORD']
-    ENCRYPTION_KEY = config['ENCRYPTION']['KEY']
+    ENCRYPTION_KEY = config['CERT']['ENCRYPTION_KEY']
+    CERTIFICATES = config['CERT']['CERTIFICATES']
     KTA_API_URL = config['KTA']['URL']
 except (KeyError, ValueError) as e:
     logger.critical(f"Error setting configuration variables: {e}")

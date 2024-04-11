@@ -1,6 +1,8 @@
 from _cert import Certificate
+from _config import CERTIFICATES
 
-cert_CSAT = Certificate('CSAT')
 
-print(cert_CSAT.certificate)
+for el in CERTIFICATES.split(','):
+    cert = Certificate(el)
+    print(cert.certificate)
 
