@@ -5,8 +5,8 @@ import os
 import sys
 from _logger import logger
 from _config import DIR_TEMP
-from _database import execute_sql_sync, create_Documents, create_DocumentsHistory
-from _cert import check_certificate_validity, load_certificates_from_disk
+from _database import execute_sql_sync, create_Documents, create_DocumentsHistory, create_Certificates
+from _cert import check_certificate_validity, load_certificates_from_disk, Certificate
 
 
 def check_directories() -> None:
@@ -26,24 +26,13 @@ def create_tables() -> None:
     try:
         execute_sql_sync(create_Documents)
         execute_sql_sync(create_DocumentsHistory)
+        execute_sql_sync(create_Certificates)
     except Exception as e:
         logger.error(f"An error occurred while creating tables: {e}")
 
 
-def check_certificates(first_attempt=True) -> None:
-    valid_cert = check_certificate_validity()
+def check_certificates() -> None:
+    cert_CSAT = Certificate('CSAT')
 
-    if not valid_cert:
-        if not first_attempt:
-            logger.critical('Couldn\'t load certificate from filesystem. Terminating program.')
-            sys.exit(1)
-        else:
-            try:
-                logger.info("Trying to load certificate from file system.")
-                load_certificates_from_disk()
-            except Exception as e:
-                logger.critical(f"Failed to load certificates from filesystem: {e}")
-                sys.exit(1)
-            check_certificates(first_attempt=False)
-    else:
-        logger.success("Certificate is valid. Program can start now.")
+
+create_tables()

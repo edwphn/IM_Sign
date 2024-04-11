@@ -106,9 +106,9 @@ def check_certificate_validity() -> bool:
 class Certificate:
     directory = DIR_CERTIFICATE
 
-    def __init__(self, name):
+    def __init__(self, name, password='123456'):
         self.name = name
-        self.password = '123456'
+        self.password = password
         self.pfx_encrypted = None
         self.pfx_decrypted = None
         self.private_key = None
@@ -121,7 +121,7 @@ class Certificate:
         if not self.fetch_valid_certificate():
             logger.warning("No valid certificates in the database. Trying to load new certificate from the disk.")
             if not self.load_from_disk():
-                logger.critical("Unable to load a valid certificate.")
+                logger.critical("Unable to load a valid certificate. Terminating program.")
                 sys.exit(1)
             else:
                 self._extract_certificate()
@@ -135,8 +135,8 @@ class Certificate:
             self._check_validity()
 
     def fetch_valid_certificate(self):
-        sql_query = f"""
-        SELECT TOP 1 CertificateData FROM dbo.Certificates WHERE Valid = 1 AND Name = {self.name} ORDER BY ID DESC
+        sql_query = """
+        SELECT TOP 1 CertificateData FROM dbo.Certificates WHERE Valid = 1 AND CertName = ? ORDER BY ID DESC
         """
         results = fetch_sql_sync(sql_query, [self.name])
         if results:
@@ -146,9 +146,9 @@ class Certificate:
 
     def load_from_disk(self) -> bool:
         if os.path.exists(self.file_path):
-            logger.info(f"Found certificate: {self.file_path}.")
+            logger.info(f"Found certificate: {os.path.basename(self.file_path)}.")
             try:
-                logger.info(f"Opening certificate {self.name}")
+                logger.info(f"Opening certificate {os.path.basename(self.file_path)}")
                 with open(self.file_path, 'rb') as f:
                     self.pfx_decrypted = f.read()
                 return True
@@ -156,7 +156,7 @@ class Certificate:
                 logger.error(f"Error reading certificate from {self.file_path}: {e}")
                 return False
         else:
-            logger.warning(f"Certificate file not found: {self.file_path}.")
+            logger.warning(f"Certificate file not found: {os.path.basename(self.file_path)}.")
             return False
 
     def _extract_certificate(self) -> None:
@@ -164,33 +164,34 @@ class Certificate:
             self.private_key, self.certificate, additional_certificates = pkcs12.load_key_and_certificates(
                 self.pfx_decrypted, self.password.encode(), default_backend()
             )
-            self.expiration = self.certificate.not_valid_after_utc,
+            self.expiration = self.certificate.not_valid_after.astimezone(timezone.utc)
             self.issuer = self.certificate.issuer.rfc4514_string(),
+            self.issuer = self.issuer[0]
             self.subject = self.certificate.subject.rfc4514_string()
 
             logger.info(f"Expiration: {self.expiration}. Issuer: {self.issuer}. Subject: {self.subject}")
 
         except Exception as e:
-            logger.critical(f"An error occurred: {e}")
+            logger.critical(f"An error occurred while extracting certificate: {e}")
             sys.exit(1)
 
-    def _encrypt_certificate(self) -> bytes:
+    def _encrypt_certificate(self) -> None:
         try:
             with open(self.file_path, 'rb') as file:
                 certificate_data = file.read()
             logger.info(f'File {self.name} was encrypted.')
-            return cipher_suite.encrypt(certificate_data)
+            self.pfx_encrypted = cipher_suite.encrypt(certificate_data)
         except Exception as e:
             logger.error(f"An error occurred: {e}.")
 
     def _decrypt_data(self) -> None:
         try:
-            self.decrypted_data = cipher_suite.decrypt(self.pfx_encrypted)
+            self.pfx_decrypted = cipher_suite.decrypt(self.pfx_encrypted)
         except Exception as e:
-            logger.critical("Decryption error: {e}")
+            logger.critical(f"Decryption error: {e}")
             sys.exit(1)
 
-    def _check_validity(self):
+    def _check_validity(self) -> None:
         if self.expiration < datetime.now(timezone.utc):
             logger.critical("Certificate has expired.")
             sys.exit(1)
@@ -210,13 +211,12 @@ class Certificate:
 
     def _delete_from_disk(self):
         try:
-            logger.info(f"Removing file {os.path.basename(self.file_path)} from the disk.")
-            os.remove(self.file_path)
-            logger.error(f"Couldn't find the file: {self.file_path}.")
+            pass
+            # os.remove(self.file_path)
         except (PermissionError, FileNotFoundError) as e:
             logger.error(f"Problem with deleting file {e}.")
         else:
             logger.success(f"The file {os.path.basename(self.file_path)} was removed from the disk.")
 
 
-cert_CSAT = Certificate('CSAT')
+
