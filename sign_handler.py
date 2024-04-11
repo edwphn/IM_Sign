@@ -6,7 +6,7 @@ import aiofiles
 import _cert
 import _database
 from _logger import logger
-from _config import config_vars
+from _config import DIR_TEMP
 
 
 class SignTime:
@@ -23,7 +23,7 @@ class SignTime:
 
 async def save_signed_file(file_content, file_uuid):
     now = datetime.now(timezone.utc)
-    file_path = f'{config_vars["DIRECTORIES"]["TEMP"]}/{file_uuid}.pdf'
+    file_path = f'{DIR_TEMP}/{file_uuid}.pdf'
     try:
         async with aiofiles.open(file_path, 'wb') as file:
             await file.write(file_content)

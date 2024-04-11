@@ -6,7 +6,8 @@ import sys
 from _logger import logger
 from _config import DIR_TEMP
 from _database import execute_sql_sync, create_Documents, create_DocumentsHistory, create_Certificates
-from _cert import check_certificate_validity, load_certificates_from_disk, Certificate
+from _cert import Certificate, certs
+from _config import CERTIFICATES
 
 
 def check_directories() -> None:
@@ -32,4 +33,6 @@ def create_tables() -> None:
 
 
 def check_certificates() -> None:
-    cert_CSAT = Certificate('CSAT')
+    cfg_certs = {name: Certificate(name) for name in CERTIFICATES.split(',')}
+    certs.update(cfg_certs)
+
