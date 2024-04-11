@@ -1,6 +1,7 @@
 # main.py
 
 import os
+from _cert import certs
 from _logger import logger
 from _config import DIR_TEMP
 import maintenance
@@ -16,11 +17,12 @@ from sign_handler import sign_flow
 
 app = FastAPI()
 
+
 # Maintenance on startup
 logger.info("Initializing maintenance.")
 app.add_event_handler("startup", maintenance.check_directories)
 app.add_event_handler("startup", maintenance.create_tables)
-app.add_event_handler("startup", maintenance.check_certificates)
+app.add_event_handler("startup", lambda: maintenance.check_certificates())
 
 
 @app.post("/sign")
@@ -28,10 +30,10 @@ async def sign(
         request: Request,
         background_tasks: BackgroundTasks,
         sender: str = Header(...),
-        purpose: str = Header(...)
+        cert_name: str = Header(...)
 ):
     sender = sanitize_input(sender)
-    purpose = sanitize_input(purpose)
+    purpose = sanitize_input(cert_name)
     file_uuid = str(uuid.uuid4())
     logger.info(f"Generated UUID for the file: {file_uuid}. Sender: {sender}. Purpose: {purpose}")
 

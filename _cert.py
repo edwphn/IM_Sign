@@ -12,7 +12,7 @@ from _logger import logger
 
 
 cipher_suite = Fernet(ENCRYPTION_KEY)
-
+certs: dict = {}
 
 class Certificate:
     directory = DIR_CERTIFICATE
