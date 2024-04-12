@@ -19,6 +19,7 @@ class Certificate:
     directory = DIR_CERTIFICATE
 
     def __init__(self, name, password='123456'):
+        logger.info(f"Processing certificate {name}")
         self.name = name
         self.password = password
         self.pfx_encrypted = None

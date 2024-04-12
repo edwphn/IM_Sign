@@ -78,8 +78,8 @@ def fetch_sql_sync(sql, params=None):
 
 # -------------- queries templates --------------
 insert_Documents = """
-INSERT INTO Documents (UUID, SignTimestamp, OriginalDocId, FileSize, Sender)
-VALUES (?, ?, ?, ?, ?)
+INSERT INTO Documents (UUID, SignTimestamp, FileSize, Sender)
+VALUES (?, ?, ?, ?)
 """
 
 insert_DocumentsHistory = """
