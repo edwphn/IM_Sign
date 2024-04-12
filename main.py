@@ -1,7 +1,7 @@
 # main.py
 
 import os
-from _cert import certs
+from _cert import CERTS
 from _logger import logger
 from _config import DIR_TEMP
 import maintenance
@@ -9,9 +9,8 @@ from fastapi import FastAPI, BackgroundTasks, Header, Request, HTTPException
 from fastapi.responses import JSONResponse
 from starlette.responses import FileResponse
 import uuid
-from datetime import datetime, timezone
 import _database
-from validators import validate_file, sanitize_input
+from validators import valid_file, sanitize_input
 from sign_handler import sign_flow
 
 
@@ -22,35 +21,39 @@ app = FastAPI()
 logger.info("Initializing maintenance.")
 app.add_event_handler("startup", maintenance.check_directories)
 app.add_event_handler("startup", maintenance.create_tables)
-app.add_event_handler("startup", lambda: maintenance.check_certificates())
+app.add_event_handler("startup", maintenance.check_certificates)
 
 
 @app.post("/sign")
 async def sign(
         request: Request,
         background_tasks: BackgroundTasks,
-        sender: str = Header(...),
-        cert_name: str = Header(...)
+        sender: str = Header(..., alias='sender'),
+        cert_name: str = Header(..., alias='cert-name')
 ):
     sender = sanitize_input(sender)
-    purpose = sanitize_input(cert_name)
+    cert_name = sanitize_input(cert_name)
     file_uuid = str(uuid.uuid4())
-    logger.info(f"Generated UUID for the file: {file_uuid}. Sender: {sender}. Purpose: {purpose}")
+    logger.info(f"Sender {sender} queued a new file with UUID: {file_uuid}. Required certificate: {cert_name}")
 
     content = await request.body()
-    now = datetime.now(timezone.utc)
     file_size = len(content)
 
+    if cert_name not in CERTS:
+        msg = f"Required certificate is unknown: {cert_name}."
+        logger.warning(msg)
+        raise HTTPException(status_code=400, detail=msg)
+
     # Validate the file
-    is_valid = await validate_file(content)
-    if not is_valid:
-        logger.warning(f"File validation failed for UUID: {file_uuid}")
-        raise HTTPException(status_code=400, detail="Invalid file. Check the file integrity or size limit.")
+    if not await valid_file(content):
+        msg = f"Invalid file. Check the file integrity or size limit 20 MB. UUID: {file_uuid}"
+        logger.warning(msg)
+        raise HTTPException(status_code=400, detail=msg)
 
     try:
-        await _database.execute_query(_database.insert_Documents, (file_uuid, now, None, None, file_size, now, sender))
+        await _database.execute_query(_database.insert_Documents, (file_uuid, None, None, file_size, sender))
         await _database.execute_query(_database.insert_DocumentsHistory,
-                                      (file_uuid, 'Received', 'Received file from the client', now))
+                                      (file_uuid, 'Received', 'Received file from the client'))
         logger.success(f"Insert new document UUID: {file_uuid} into database.")
     except Exception as e:
         msg = f"Database operation failed for UUID: {file_uuid}. Error: {e}"
@@ -58,14 +61,20 @@ async def sign(
         raise HTTPException(status_code=500, headers={"Task-Status": "Failed"}, detail=msg)
 
     # Send the file to the signing flow
-    background_tasks.add_task(sign_flow, content, file_uuid)
+    background_tasks.add_task(sign_flow, content, cert_name, file_uuid)
 
     return {"uuid": file_uuid}
 
 
 @app.get("/get_signed/{file_uuid}")
 async def get_signed(file_uuid: str):
+    try:
+        file_uuid = uuid.UUID(file_uuid)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid UUID format.")
+
     status = await _database.fetch_sql(_database.check_file_status, file_uuid)
+
     if not status:
         logger.warning(f'UUID: {file_uuid} - No such UUID in database.')
         raise HTTPException(status_code=404, detail="No such UUID in database.")
@@ -75,7 +84,7 @@ async def get_signed(file_uuid: str):
         if not os.path.exists(file_path):
             logger.warning(f'UUID: {file_uuid} - Can\'t locate file on disk.')
             raise HTTPException(status_code=404, detail="Oooops! File was lost.", headers={"Task-Status": "Failed"})
-        logger.warning(f'UUID: {file_uuid} - Transmitted to the client.')
+        logger.success(f'UUID: {file_uuid} - Transmitted to the client.')
         return FileResponse(path=file_path, headers={"Task-Status": "Completed"})
 
     elif status[0] == 'Failed':
