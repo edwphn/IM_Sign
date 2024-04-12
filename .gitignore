@@ -5,3 +5,4 @@
 /load_certificate/*
 !/load_certificate/.gitkeep
 *.log
+temp*.py
