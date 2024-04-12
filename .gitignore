@@ -1,5 +1,7 @@
 /venv/
 .idea
 /data/*
+!/data/.gitkeep
 /load_certificate/*
+!/load_certificate/.gitkeep
 *.log
