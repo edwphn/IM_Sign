@@ -1,5 +1,5 @@
 /venv/
 .idea
-/files/*
+/data/*
 /load_certificate/*
 *.log
