@@ -1,27 +1,13 @@
-# from _cert import Certificate
-# from _config import CERTIFICATES
-#
-#
-# # cfg_certs = {name: Certificate(name) for name in CERTIFICATES.replace(' ', '').strip(',').split(',')}
-#
-#
-# certs = CERTIFICATES.strip(',').split(',')
-#
-# print(certs)
-#
-# for cert in certs:
-#     cert = cert.split(':')
-#     if len(cert) == 2:
-#             cfg_certs = {name: Certificate(name, pwd) for name, pwd in cert}
-#     else:
-#         name = cert
-#         cfg_certs = {name: Certificate(name) for name in cert}
-#
-#     CERTS.update(cfg_certs)
-
-a = {}
-
-if a:
-    print('yes')
-
-
+[DATABASE]
+DB_SERVER=10.0.0.56
+DB_NAME=IM_Sign
+DB_USER=sql3_servis
+DB_PASSWORD=A3eURK7sAbj9CjTM
+[KTA]
+URL=
+[DIRECTORIES]
+certificate=load_certificate
+temp_folder=data
+[CERT]
+ENCRYPTION_KEY=2-o5jJN8-9ncOhwHt49xHcq919v_TXYyXTezC3tanUo=
+CERTIFICATES=CSAT Test_CSAT_1234,foo,
