@@ -6,3 +6,4 @@
 !/load_certificate/.gitkeep
 *.log
 temp*.py
+config.ini
