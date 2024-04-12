@@ -12,7 +12,8 @@ from _logger import logger
 
 
 cipher_suite = Fernet(ENCRYPTION_KEY)
-certs: dict = {}
+CERTS: dict = {}
+
 
 class Certificate:
     directory = DIR_CERTIFICATE
@@ -130,6 +131,3 @@ class Certificate:
             logger.error(f"Problem with deleting file {e}.")
         else:
             logger.success(f"The file {os.path.basename(self.file_path)} was removed from the disk.")
-
-
-

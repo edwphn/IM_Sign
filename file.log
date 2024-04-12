@@ -1,75 +1,437 @@
-2024-04-11 15:32:01 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 15:32:01 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 15:32:02 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 15:32:02 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 15:32:02 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 15:32:02 	WARNING _cert.py:55 No valid certificates found in the database for FOO.
-2024-04-11 15:32:02 	INFO _cert.py:59 Trying to load new certificate from the disk.
-2024-04-11 15:32:02 	WARNING _cert.py:71 Certificate file not found: FOO.pfx.
-2024-04-11 15:32:02 	CRITICAL _cert.py:34 Unable to load a valid certificate. Terminating program.
-2024-04-11 15:32:27 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 15:32:27 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 15:32:27 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 15:32:27 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 15:32:27 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 16:12:25 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:12:25 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:14:37 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:14:37 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:14:38 	INFO main.py:21 Initializing maintenance.
-2024-04-11 16:15:15 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:15:15 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:15:17 	INFO main.py:21 Initializing maintenance.
-2024-04-11 16:15:17 	INFO main.py:105 Starting FastAPI server
-2024-04-11 16:15:17 	INFO maintenance.py:22 Temporary directory found.
-2024-04-11 16:15:17 	INFO maintenance.py:26 Checking database table existence.
-2024-04-11 16:15:17 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 16:15:17 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 16:15:17 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 16:31:31 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:31:31 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:31:32 	INFO main.py:21 Initializing maintenance.
-2024-04-11 16:31:32 	INFO main.py:105 Starting FastAPI server
-2024-04-11 16:31:32 	INFO maintenance.py:25 Temporary directory found.
-2024-04-11 16:31:32 	INFO maintenance.py:29 Checking database table existence.
-2024-04-11 16:31:32 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 16:31:32 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 16:31:32 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 16:36:29 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:36:29 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:36:31 	INFO main.py:21 Initializing maintenance.
-2024-04-11 16:36:31 	INFO main.py:105 Starting FastAPI server
-2024-04-11 16:36:31 	INFO maintenance.py:22 Temporary directory found.
-2024-04-11 16:36:31 	INFO maintenance.py:26 Checking database table existence.
-2024-04-11 16:36:31 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 16:36:31 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 16:36:31 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 16:37:13 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:37:13 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:37:14 	INFO main.py:23 Initializing maintenance.
-2024-04-11 16:37:14 	INFO main.py:107 Starting FastAPI server
-2024-04-11 16:37:14 	INFO maintenance.py:22 Temporary directory found.
-2024-04-11 16:37:14 	INFO maintenance.py:26 Checking database table existence.
-2024-04-11 16:37:14 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 16:37:14 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 16:37:14 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 16:37:40 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:37:40 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:37:42 	INFO main.py:23 Initializing maintenance.
-2024-04-11 16:37:42 	INFO main.py:107 Starting FastAPI server
-2024-04-11 16:37:42 	INFO maintenance.py:22 Temporary directory found.
-2024-04-11 16:37:42 	INFO maintenance.py:26 Checking database table existence.
-2024-04-11 16:37:42 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 16:37:42 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 16:37:42 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 16:38:03 	INFO _config.py:9 Loading configuration settings.
-2024-04-11 16:38:03 	SUCCESS _config.py:38 Settings have been loaded.
-2024-04-11 16:38:04 	INFO main.py:23 Initializing maintenance.
-2024-04-11 16:38:04 	INFO main.py:107 Starting FastAPI server
-2024-04-11 16:38:04 	INFO maintenance.py:22 Temporary directory found.
-2024-04-11 16:38:04 	INFO maintenance.py:26 Checking database table existence.
-2024-04-11 16:38:04 	INFO _cert.py:84 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
-2024-04-11 16:38:04 	SUCCESS _cert.py:89 Certificated CSAT successfully extracted.
-2024-04-11 16:38:04 	WARNING _cert.py:111 Certificate CSAT will expire on: 2024-10-13 17:03:57+00:00
-2024-04-11 16:40:10 	WARNING main.py:112 #######################################################
-2024-04-11 16:40:10 	WARNING main.py:113 {'CSAT': <_cert.Certificate object at 0x000001C1D2B968A0>}
+2024-04-12 13:04:46 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:04:46 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:04:47 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:04:47 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:04:47 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:04:48 	WARNING _cert.py:56 No valid certificates found in the database for CSAT.
+2024-04-12 13:04:48 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:04:48 	INFO _cert.py:62 Found certificate: CSAT.pfx.
+2024-04-12 13:04:48 	INFO _cert.py:64 Opening certificate CSAT.pfx
+2024-04-12 13:04:48 	CRITICAL _cert.py:87 An error occurred while extracting certificate: Invalid password or PKCS12 data
+2024-04-12 13:15:26 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:15:26 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:15:26 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:15:26 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:15:28 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:15:28 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:15:28 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:15:28 	WARNING _cert.py:56 No valid certificates found in the database for CSATTest_CSAT_1234.
+2024-04-12 13:15:28 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:15:28 	WARNING _cert.py:72 Certificate file not found: CSATTest_CSAT_1234.pfx.
+2024-04-12 13:15:28 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:15:42 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:15:42 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:15:42 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:15:42 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:15:43 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:15:43 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:15:43 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:15:44 	WARNING _cert.py:56 No valid certificates found in the database for CSATTest_CSAT_1234.
+2024-04-12 13:15:44 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:15:44 	WARNING _cert.py:72 Certificate file not found: CSATTest_CSAT_1234.pfx.
+2024-04-12 13:15:44 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:16:59 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:16:59 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:17:46 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:17:46 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:17:47 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:17:47 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:17:48 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:17:48 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:17:48 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:17:49 	WARNING _cert.py:56 No valid certificates found in the database for CSATTest_CSAT_1234.
+2024-04-12 13:17:49 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:17:49 	WARNING _cert.py:72 Certificate file not found: CSATTest_CSAT_1234.pfx.
+2024-04-12 13:17:49 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:17:57 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:17:57 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:17:58 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:17:58 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:17:59 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:17:59 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:17:59 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:17:59 	WARNING _cert.py:56 No valid certificates found in the database for CSATTest_CSAT_1234.
+2024-04-12 13:17:59 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:17:59 	WARNING _cert.py:72 Certificate file not found: CSATTest_CSAT_1234.pfx.
+2024-04-12 13:17:59 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:18:42 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:18:42 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:18:42 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:18:42 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:18:43 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:18:43 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:18:43 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:18:44 	WARNING _cert.py:56 No valid certificates found in the database for CSAT Test_CSAT_1234.
+2024-04-12 13:18:44 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:18:44 	WARNING _cert.py:72 Certificate file not found: CSAT Test_CSAT_1234.pfx.
+2024-04-12 13:18:44 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:21:06 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:21:06 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:21:06 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:21:06 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:21:08 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:21:08 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:21:08 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:21:08 	WARNING _cert.py:56 No valid certificates found in the database for CSAT Test_CSAT_1234.
+2024-04-12 13:21:08 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:21:08 	WARNING _cert.py:72 Certificate file not found: CSAT Test_CSAT_1234.pfx.
+2024-04-12 13:21:08 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:25:10 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:25:10 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:25:11 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:25:11 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:25:11 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:26:20 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:26:20 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:26:21 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:26:21 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:26:21 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:26:44 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:26:44 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:26:45 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:26:45 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:26:45 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:27:35 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:27:35 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:27:36 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:27:36 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:27:36 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:31:06 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:31:06 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:31:07 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:31:07 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:31:07 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:33:23 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:33:23 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:33:23 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:33:23 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:33:25 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:33:25 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:33:25 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:33:30 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:33:30 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:33:31 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:33:31 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:33:32 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:33:32 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:33:32 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:34:26 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:34:26 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:34:48 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:34:48 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:34:49 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:34:49 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:34:50 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:34:50 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:34:50 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:35:42 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:35:42 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:35:43 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:35:43 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:35:44 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:35:44 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:35:44 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:36:04 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:36:04 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:36:05 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:36:05 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:36:06 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:36:06 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:36:06 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:36:34 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:36:34 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:36:35 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:36:35 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:36:36 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:36:36 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:36:36 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:36:53 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:36:53 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:36:54 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:36:54 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:36:56 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:36:56 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:36:56 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:38:53 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:38:53 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:38:54 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:38:54 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:38:55 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:38:55 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:38:55 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:39:24 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:39:24 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:39:24 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:39:24 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:39:26 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:39:26 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:39:26 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:39:37 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:39:37 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:39:37 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:39:37 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:39:39 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:39:39 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:39:39 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:40:09 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:40:09 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:40:11 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:40:11 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:40:11 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:42:34 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:42:34 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:42:35 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:42:35 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:42:36 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:42:36 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:42:36 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:43:03 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:43:03 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:43:03 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:43:03 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:43:05 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:43:05 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:43:05 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:43:32 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:43:32 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:43:32 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:43:32 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:43:34 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:43:34 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:43:34 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:43:51 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:43:51 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:43:51 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:43:51 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:43:52 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:43:52 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:43:52 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:45:43 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:45:43 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:45:44 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:45:44 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:45:46 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:45:46 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:45:46 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:46:50 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:46:50 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:46:52 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:46:52 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:46:53 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:46:53 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:46:53 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:47:46 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:47:46 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:47:47 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:47:47 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:47:47 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:48:26 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:48:26 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:48:28 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:48:28 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:48:28 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:50:09 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:50:09 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:50:10 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:50:10 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:50:10 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:53:09 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:53:09 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:53:10 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:53:10 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:53:10 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:53:10 	WARNING _cert.py:56 No valid certificates found in the database for CSAT.
+2024-04-12 13:53:10 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:53:10 	INFO _cert.py:62 Found certificate: CSAT.pfx.
+2024-04-12 13:53:10 	INFO _cert.py:64 Opening certificate CSAT.pfx
+2024-04-12 13:53:11 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 13:53:11 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 13:53:11 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 13:53:11 	INFO _cert.py:96 File CSAT was encrypted.
+2024-04-12 13:53:11 	INFO _cert.py:122 Encrypted file CSAT.pfx was loaded to database.
+2024-04-12 13:53:11 	SUCCESS _cert.py:133 The file CSAT.pfx was removed from the disk.
+2024-04-12 13:53:11 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 13:53:11 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:53:11 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 13:53:11 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:54:37 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:54:37 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:54:39 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:54:39 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:54:39 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:54:40 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 13:54:40 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 13:54:40 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 13:54:40 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 13:54:40 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:54:40 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 13:54:40 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 13:56:31 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 13:56:31 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 13:56:33 	INFO main.py:21 Initializing maintenance.
+2024-04-12 13:56:33 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 13:56:33 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 13:56:33 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 13:56:33 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 13:56:33 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 13:56:33 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 13:56:33 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 13:56:33 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 13:56:33 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:04:46 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:04:46 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:04:47 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:04:47 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:04:47 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:04:48 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:04:48 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:04:48 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:04:48 	WARNING _cert.py:56 No valid certificates found in the database for foo.
+2024-04-12 14:04:48 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:04:48 	INFO _cert.py:62 Found certificate: foo.pfx.
+2024-04-12 14:04:48 	INFO _cert.py:64 Opening certificate foo.pfx
+2024-04-12 14:04:48 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:04:48 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:04:48 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:04:48 	INFO _cert.py:96 File foo was encrypted.
+2024-04-12 14:04:48 	INFO _cert.py:122 Encrypted file foo.pfx was loaded to database.
+2024-04-12 14:04:48 	SUCCESS _cert.py:133 The file foo.pfx was removed from the disk.
+2024-04-12 14:04:48 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:04:48 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:04:48 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:04:48 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:06:29 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:06:29 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:06:31 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:06:31 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:06:31 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:06:31 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:06:31 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:06:31 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:06:31 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:06:31 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:06:31 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:06:31 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:06:31 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:06:31 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:06:31 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:07:11 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:07:11 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:07:13 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:07:13 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:07:13 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:07:13 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:07:13 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:07:13 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:07:13 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:07:13 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:07:13 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:07:13 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:07:13 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:07:13 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:07:13 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:07:17 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:07:17 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:07:19 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:07:19 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:07:19 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:07:19 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:07:19 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:07:19 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:07:19 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:07:19 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:07:19 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:07:19 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:07:19 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:07:19 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:07:19 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:08:03 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:08:03 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:08:04 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:08:04 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:08:04 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:08:05 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:08:05 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:08:05 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:08:05 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:08:05 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:08:05 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:08:05 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:08:05 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:08:05 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:08:05 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:08:08 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:08:08 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:08:09 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:08:09 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:08:09 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:08:09 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:08:09 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:08:09 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:08:10 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:08:10 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:08:10 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:08:10 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:08:10 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:08:10 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:08:10 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:08:33 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:08:33 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:08:34 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:08:34 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:08:34 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:08:35 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:08:35 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:08:35 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:08:35 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:08:35 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:08:35 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:08:35 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:08:35 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:08:35 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:08:35 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:08:37 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:08:37 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:08:38 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:08:38 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:08:38 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:08:39 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:08:39 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:08:39 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:08:39 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:08:39 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:08:39 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:08:39 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:08:39 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:08:39 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:08:39 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:10:48 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:10:48 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:10:50 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:10:50 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:10:50 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:10:50 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:10:50 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:10:50 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:10:50 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:10:50 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:10:50 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:10:50 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:10:50 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:10:50 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:10:50 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.
+2024-04-12 14:12:02 	INFO _config.py:9 Loading configuration settings.
+2024-04-12 14:12:02 	SUCCESS _config.py:38 Settings have been loaded.
+2024-04-12 14:12:03 	INFO main.py:21 Initializing maintenance.
+2024-04-12 14:12:03 	INFO maintenance.py:22 Temporary directory found.
+2024-04-12 14:12:03 	INFO maintenance.py:26 Checking database table existence.
+2024-04-12 14:12:04 	INFO _cert.py:85 Expiration: 2024-05-03 07:27:03+00:00. Issuer: CN=DEMO PostSignum Qualified CA 4,O=Česká pošta\, s.p.,2.5.4.97=NTRCZ-47114983,C=CZ. Subject: 2.5.4.5=S456123 - DEMO certifikat,CN=Czech Airlines Technics\, a.s. - TEST,OU=1000,O=DEMO Organizace,2.5.4.97=NTRCZ-12345678,C=CZ
+2024-04-12 14:12:04 	SUCCESS _cert.py:90 Certificated CSAT successfully extracted.
+2024-04-12 14:12:04 	WARNING _cert.py:112 Certificate CSAT will expire on: 2024-05-03 07:27:03+00:00
+2024-04-12 14:12:04 	INFO _cert.py:85 Expiration: 2024-10-13 17:03:57+00:00. Issuer: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ. Subject: 1.2.840.113549.1.9.1=hello@pishon.store,CN=Eduard,O=IM,L=Prague,ST=Some-State,C=CZ
+2024-04-12 14:12:04 	SUCCESS _cert.py:90 Certificated foo successfully extracted.
+2024-04-12 14:12:04 	WARNING _cert.py:112 Certificate foo will expire on: 2024-10-13 17:03:57+00:00
+2024-04-12 14:12:04 	WARNING _cert.py:56 No valid certificates found in the database for LO.
+2024-04-12 14:12:04 	INFO _cert.py:60 Trying to load new certificate from the disk.
+2024-04-12 14:12:04 	WARNING _cert.py:72 Certificate file not found: LO.pfx.
+2024-04-12 14:12:04 	CRITICAL _cert.py:35 Unable to load a valid certificate. Terminating program.

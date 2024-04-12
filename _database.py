@@ -27,6 +27,10 @@ async def fetch_sql(sql, params=None):
             results = await run_in_executor(cursor.fetchall)
     finally:
         connection.close()
+
+    if not results:
+        return None
+
     return results[0]
 
 
@@ -74,13 +78,13 @@ def fetch_sql_sync(sql, params=None):
 
 # -------------- queries templates --------------
 insert_Documents = """
-INSERT INTO Documents (UUID, SignTimestamp, FileName, OriginalDocId, FileSize, RecordTime, Sender)
-VALUES (?, ?, ?, ?, ?, ?, ?)
+INSERT INTO Documents (UUID, SignTimestamp, OriginalDocId, FileSize, Sender)
+VALUES (?, ?, ?, ?, ?)
 """
 
 insert_DocumentsHistory = """
-INSERT INTO DocumentsHistory (UUID, Status, Message, RecordTime)
-VALUES (?, ?, ?, ?)
+INSERT INTO DocumentsHistory (UUID, Status, Message)
+VALUES (?, ?, ?)
 """
 
 check_file_status = """
@@ -94,8 +98,6 @@ BEGIN
         ID INT IDENTITY(1,1) PRIMARY KEY,
         UUID uniqueidentifier NOT NULL UNIQUE,
         SignTimestamp DATETIME2 NULL,
-        FileName NVARCHAR(500) NULL,
-        OriginalDocId NVARCHAR(500) NULL,
         FileSize INT NULL,
         RecordTime DATETIME NOT NULL DEFAULT GETDATE(),
         Sender NVARCHAR(255) NULL
