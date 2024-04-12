@@ -82,6 +82,10 @@ INSERT INTO Documents (UUID, SignTimestamp, FileSize, Sender)
 VALUES (?, ?, ?, ?)
 """
 
+update_Documents = """
+UPDATE Documents SET SignTimestamp = ? WHERE UUID = ?
+"""
+
 insert_DocumentsHistory = """
 INSERT INTO DocumentsHistory (UUID, Status, Message)
 VALUES (?, ?, ?)

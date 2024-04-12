@@ -58,6 +58,7 @@ async def sign_pdf(data: bytes, cert_name: str, file_uuid: str):
         raise
     else:
         await _database.execute_query(_database.insert_DocumentsHistory, (file_uuid, 'Signed', 'File was signed'))
+        await _database.execute_query(_database.update_Documents, (timestamp.db(), file_uuid))
         logger.success(f"{file_uuid} successfully signed with {cert_name}.")
 
     return data + signature
