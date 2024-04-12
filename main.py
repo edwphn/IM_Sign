@@ -51,7 +51,7 @@ async def sign(
         raise HTTPException(status_code=400, detail=msg)
 
     try:
-        await _database.execute_query(_database.insert_Documents, (file_uuid, None, None, file_size, sender))
+        await _database.execute_query(_database.insert_Documents, (file_uuid, None, file_size, sender))
         await _database.execute_query(_database.insert_DocumentsHistory,
                                       (file_uuid, 'Received', 'Received file from the client'))
         logger.success(f"Insert new document UUID: {file_uuid} into database.")
