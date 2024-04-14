@@ -18,7 +18,7 @@ from sign_handler import sign_flow
 app = FastAPI()
 
 # Maintenance on startup
-logger.info("Initializing maintenance.")
+logger.critical("Initializing maintenance.")
 app.add_event_handler("startup", maintenance.check_directories)
 app.add_event_handler("startup", maintenance.create_tables)
 app.add_event_handler("startup", maintenance.check_certificates)
@@ -27,6 +27,8 @@ app.add_event_handler("startup", maintenance.check_certificates)
 class SignResponse(BaseModel):
     uuid: str
 
+# TODO add to base model header. do not forget to documentation
+# TODO remove files that exists longer than 2 days
 
 @app.post("/sign", response_model=SignResponse, summary="Sign a file",
           description="Receives a file and a certificate name from the sender, signs the file asynchronously.")
@@ -83,13 +85,13 @@ async def get_signed(file_uuid: str):
     try:
         file_uuid = uuid.UUID(file_uuid)
     except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid UUID format.")
+        raise HTTPException(status_code=400, detail="Invalid UUID format.", headers={"Task-Status": "Failed"})
 
     status = await _database.fetch_sql(_database.check_file_status, file_uuid)
 
     if not status:
         logger.warning(f'UUID: {file_uuid} - No such UUID in database.')
-        raise HTTPException(status_code=404, detail="No such UUID in database.")
+        raise HTTPException(status_code=404, detail="No such UUID in database.", headers={"Task-Status": "Failed"})
 
     elif status[0] == 'Saved':
         file_path = f"{DIR_TEMP}/{file_uuid}.pdf"
@@ -107,20 +109,16 @@ async def get_signed(file_uuid: str):
     elif status[0] == 'Transmitted':
         warning = "File was processed, transmitted to the client and removed from the database."
         logger.warning(f'UUID: {file_uuid} - {warning}')
-        return JSONResponse(content={"warning": warning}, headers={"Task-Status": "Transmitted"}, status_code=410)
+        return JSONResponse(content={"warning": warning}, headers={"Task-Status": "Failed"}, status_code=410)
 
-    elif status[0] == 'Received':
-        message = 'The file is still being processed, please try again later.'
+    elif status[0] in ['Received', 'Signed']:
+        message = f'The file is still being processed, please try again later. Current status: {status[0]}'
         logger.info(f'UUID: {file_uuid} - {message}')
-        return JSONResponse(
-            content={"status": message},
-            headers={"Task-Status": "In Progress"},
-            status_code=202
-        )
+        return JSONResponse(content={"status": message}, headers={"Task-Status": "In Progress"}, status_code=202)
 
     else:
-        logger.debug(f'Status for {file_uuid} is {status}')
-        raise HTTPException(status_code=404, detail="Unexpected status")
+        logger.error(f'Status for {file_uuid} is {status}')
+        raise HTTPException(status_code=404, detail="Unexpected status", headers={"Task-Status": "Failed"})
 
 
 @app.get("/health")

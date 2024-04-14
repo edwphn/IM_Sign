@@ -3,11 +3,11 @@
     "disable_existing_loggers": false,
     "formatters": {
         "standard": {
-            "format": "%(levelname)s - %(asctime)s - %(filename)s:%(lineno)s - %(message)s",
+            "format": "%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S"
         },
         "uvicorn_format": {
-            "format": "%(levelname)s - %(asctime)s - [UVICORN] - %(message)s",
+            "format": "%(asctime)s | %(levelname)s | [UVICORN] | %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S"
         }
     },

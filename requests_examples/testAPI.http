@@ -1,8 +1,8 @@
 ### Client requests examples
 
-GET http://127.0.0.1:8000/
+GET http://127.0.0.1:8000/health
 ###
-GET http://127.0.0.1:8000/get_signed/891bd70f-08af-4995-b2c2-e15522900963
+GET http://127.0.0.1:8000/get_signed/ceb22c7d-1ccb-48ed-95f2-f196d4403227
 ###
 POST http://127.0.0.1:8000/sign
 Content-Type: application/octet-stream
