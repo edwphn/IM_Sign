@@ -88,7 +88,7 @@ class Certificate:
             logger.critical(f"An error occurred while extracting certificate: {e}")
             sys.exit(1)
         else:
-            logger.success(f"Certificated {self.name} successfully extracted.")
+            logger.info(f"Certificated {self.name} successfully extracted.")
 
     def _encrypt_certificate(self) -> None:
         try:
@@ -131,4 +131,4 @@ class Certificate:
         except (PermissionError, FileNotFoundError) as e:
             logger.error(f"Problem with deleting file {e}.")
         else:
-            logger.success(f"The file {os.path.basename(self.file_path)} was removed from the disk.")
+            logger.info(f"The file {os.path.basename(self.file_path)} was removed from the disk.")

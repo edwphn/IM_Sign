@@ -6,7 +6,7 @@ import asyncio
 
 async def valid_file(file_content: bytes) -> bool:
     async def check_file_size() -> bool:
-        max_size = 20971520
+        max_size = 20_971_520
         return len(file_content) <= max_size
 
     async def check_pdf_integrity_async() -> bool:

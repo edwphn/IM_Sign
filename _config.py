@@ -35,4 +35,4 @@ except (KeyError, ValueError) as e:
     sys.exit(1)
 
 
-logger.success('Settings have been loaded.')
+logger.info('Settings have been loaded.')
