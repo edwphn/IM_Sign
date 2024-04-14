@@ -1,6 +1,10 @@
 # maintenance.py
 
-""" Module for maintenance purpose. """
+""" Module for maintenance purposes in a FastAPI application.
+This module includes functionalities to check directories, create database tables,
+and verify certificates based on configuration settings.
+"""
+
 import os
 import sys
 from _logger import logger
@@ -11,6 +15,12 @@ from _config import CERTIFICATES
 
 
 def check_directories() -> None:
+    """Checks for the existence of the temporary directory specified in the configuration.
+    Creates the directory if it does not exist and logs the activity.
+
+    Raises:
+        SystemExit: If the DIR_TEMP is not defined in the configuration.
+    """
     if not DIR_TEMP:
         logger.critical('Missing temporary folder in config.')
         sys.exit(1)
@@ -23,6 +33,11 @@ def check_directories() -> None:
 
 
 def create_tables() -> None:
+    """Attempts to create necessary database tables by executing SQL commands.
+    Logs information about the process and errors if any occur.
+
+    Catches and logs exceptions that might occur during the database operations.
+    """
     logger.info('Checking database table existence.')
     try:
         execute_sql_sync(create_Documents)
@@ -33,6 +48,11 @@ def create_tables() -> None:
 
 
 def check_certificates() -> None:
+    """Parses certificate data from configuration and initializes certificate objects.
+    Updates the global certificate registry with these objects.
+
+    Logs errors if the certificate data is improperly formatted or missing.
+    """
     certs = CERTIFICATES.strip(',').split(',')
     cfg_certs = {}
 
@@ -52,5 +72,3 @@ def check_certificates() -> None:
         CERTS.update(cfg_certs)
     else:
         logger.error("No valid certificates data found in config.ini")
-
-
