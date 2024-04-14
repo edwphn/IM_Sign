@@ -1,4 +1,6 @@
 # _sign_pdf.pdf
+import asyncio
+import time
 
 from endesive import pdf
 from datetime import datetime, timezone
@@ -59,11 +61,12 @@ async def sign_pdf(data: bytes, cert_name: str, file_uuid: str):
     else:
         await _database.execute_query(_database.insert_DocumentsHistory, (file_uuid, 'Signed', 'File was signed'))
         await _database.execute_query(_database.update_Documents, (timestamp.db(), file_uuid))
-        logger.success(f"{file_uuid} successfully signed with {cert_name}.")
+        logger.info(f"{file_uuid} successfully signed with {cert_name}.")
 
     return data + signature
 
 
 async def sign_flow(file_content, cert_name, file_uuid):
+    await asyncio.sleep(30)
     signed_content = await sign_pdf(file_content, cert_name, file_uuid)
     await save_signed_file(signed_content, file_uuid)

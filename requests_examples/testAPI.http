@@ -1,11 +1,12 @@
 ### Client requests examples
 
-GET http://127.0.0.1:8000/get_signed/341cfc15-b913-44fa-97bd-b54ec2537cad
-
+GET http://127.0.0.1:8000/
+###
+GET http://127.0.0.1:8000/get_signed/891bd70f-08af-4995-b2c2-e15522900963
 ###
 POST http://127.0.0.1:8000/sign
 Content-Type: application/octet-stream
 sender: Ben Laden
 cert-name: CSAT
 
-< C:\Users\pisarev\Desktop\temp\Back up 12.10.2023.7z
+< /home/ed/Downloads/Invoice-3C893A8D-0002.pdf

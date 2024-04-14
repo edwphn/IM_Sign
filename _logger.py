@@ -1,21 +1,20 @@
 # _logger.py
 
-import sys
-from loguru import logger
+import json
+import logging.config
+
+
+def get_logging_config():
+    with open('logging_config.json', 'r') as config_file:
+        return json.load(config_file)
+
+
+logging_config = get_logging_config()
+logging.config.dictConfig(logging_config)
+
 
 def setup_logger():
-    logger.remove()
-    logger.add(
-        sys.stderr,
-        format="{time:YYYY-MM-DD HH:mm:ss} \t{level} {file}:{line} {message}",
-        level="INFO"
-    )
-    logger.add(
-        "file.log",
-        rotation="10 MB",
-        format="{time:YYYY-MM-DD HH:mm:ss} \t{level} {file}:{line} {message}",
-        level="DEBUG"
-    )
+    return logging.getLogger(__name__)
 
 
-setup_logger()
+logger = setup_logger()
