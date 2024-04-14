@@ -2,7 +2,6 @@ endesive
 fastapi
 uvicorn
 cryptography
-loguru
 pyodbc
 aiofiles
 PyPDF2
