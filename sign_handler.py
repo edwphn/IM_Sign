@@ -67,6 +67,6 @@ async def sign_pdf(data: bytes, cert_name: str, file_uuid: str):
 
 
 async def sign_flow(file_content, cert_name, file_uuid):
-    await asyncio.sleep(30)
+    # await asyncio.sleep(30)
     signed_content = await sign_pdf(file_content, cert_name, file_uuid)
     await save_signed_file(signed_content, file_uuid)
