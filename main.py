@@ -2,23 +2,23 @@
 
 from _logger import logger, logging_config
 import os
+import uuid
 from pydantic import BaseModel
 from _cert import CERTS
 from _config import DIR_TEMP
+import _database
 import maintenance
+from sign_handler import sign_flow
+from validators import valid_file, sanitize_input
 from fastapi import FastAPI, BackgroundTasks, Header, Request, HTTPException
 from fastapi.responses import JSONResponse
 from starlette.responses import FileResponse
-import uuid
-import _database
-from validators import valid_file, sanitize_input
-from sign_handler import sign_flow
 
 
 app = FastAPI()
 
 # Maintenance on startup
-logger.critical("Initializing maintenance.")
+logger.info("Initializing maintenance.")
 app.add_event_handler("startup", maintenance.check_directories)
 app.add_event_handler("startup", maintenance.create_tables)
 app.add_event_handler("startup", maintenance.check_certificates)
@@ -81,7 +81,7 @@ async def sign(
 
 
 @app.get("/get_signed/{file_uuid}")
-async def get_signed(file_uuid: str):
+async def get_signed(file_uuid: str, background_tasks: BackgroundTasks):
     try:
         file_uuid = uuid.UUID(file_uuid)
     except ValueError:
@@ -95,11 +95,17 @@ async def get_signed(file_uuid: str):
 
     elif status[0] == 'Saved':
         file_path = f"{DIR_TEMP}/{file_uuid}.pdf"
+
         if not os.path.exists(file_path):
             logger.warning(f'UUID: {file_uuid} - Can\'t locate file on disk.')
             raise HTTPException(status_code=404, detail="Oooops! File was lost.", headers={"Task-Status": "Failed"})
+
+        response = FileResponse(path=file_path, headers={"Task-Status": "Completed"})
+        background_tasks.add_task(handle_file_post_send, file_uuid, file_path)
+
         logger.info(f'UUID: {file_uuid} - Transmitted to the client.')
-        return FileResponse(path=file_path, headers={"Task-Status": "Completed"})
+
+        return response
 
     elif status[0] == 'Failed':
         error_message = status[1] if len(status) > 1 else "File processing failed with an unknown error."
@@ -119,6 +125,20 @@ async def get_signed(file_uuid: str):
     else:
         logger.error(f'Status for {file_uuid} is {status}')
         raise HTTPException(status_code=404, detail="Unexpected status", headers={"Task-Status": "Failed"})
+
+
+async def handle_file_post_send(file_uuid: uuid.UUID, file_path: str):
+    try:
+        os.remove(file_path)
+    except (PermissionError, FileNotFoundError) as e:
+        logger.error(f"Problem with deleting file {e}.")
+    else:
+        logger.info(f"File {file_path} has been removed from disk after transmission.")
+
+        await _database.execute_query(
+            _database.insert_DocumentsHistory, (file_uuid, 'Transmitted', 'File was sent back to the client.')
+        )
+        logger.info(f"Recorded in the database that file {file_uuid} was transmitted.")
 
 
 @app.get("/health")
