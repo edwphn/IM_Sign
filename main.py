@@ -29,8 +29,7 @@ class SignResponse(BaseModel):
     uuid: str
 
 
-@app.post("/sign", response_model=SignResponse, summary="Sign a file",
-          description="Receives a file and a certificate name from the sender, signs the file asynchronously.")
+@app.post("/sign", response_model=SignResponse, summary="Sign a file")
 async def sign(
         request: Request,
         background_tasks: BackgroundTasks,
@@ -79,8 +78,33 @@ async def sign(
     return JSONResponse(content={"uuid": file_uuid}, headers={"Task-Status": "Completed"}, status_code=200)
 
 
-@app.get("/get_signed/{file_uuid}")
+@app.get("/get_signed/{file_uuid}", responses={
+    200: {
+        "description": "Returns the signed PDF file to the client.",
+        "content": {"application/pdf": {}}
+    },
+    202: {
+        "description": "File is still being processed. Try again later."
+    },
+    400: {
+        "description": "Invalid UUID format provided."
+    },
+    404: {
+        "description": "File not found or no such UUID in database."
+    },
+    410: {
+        "description": "File was processed and removed from the server."
+    },
+    422: {
+        "description": "Error processing the file due to internal state."
+    }
+})
 async def get_signed(file_uuid: str, background_tasks: BackgroundTasks):
+    """
+    Retrieve a signed PDF file by its UUID. This endpoint checks the file's status in the database,
+    ensures the file exists on disk, and sends it to the client. If the file is not ready or encounters
+    issues, appropriate status messages and codes are returned.
+    """
     try:
         file_uuid = uuid.UUID(file_uuid)
     except ValueError:
