@@ -39,7 +39,7 @@ async def delete_old_files():
         - The function runs asynchronously and should be handled within an async event loop.
     """
     now = datetime.now(timezone.utc)
-    threshold = timedelta(days=5)
+    threshold = timedelta(minutes=5)
 
     for filename in os.listdir(DIR_TEMP):
         file_path = os.path.join(DIR_TEMP, filename)
