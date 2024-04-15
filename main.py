@@ -29,8 +29,6 @@ class SignResponse(BaseModel):
     uuid: str
 
 
-# TODO add to base model header. do not forget to documentation
-
 @app.post("/sign", response_model=SignResponse, summary="Sign a file",
           description="Receives a file and a certificate name from the sender, signs the file asynchronously.")
 async def sign(
@@ -39,9 +37,9 @@ async def sign(
         sender: str = Header(..., description="The identifier of the file sender", alias='sender'),
         cert_name: str = Header(..., description="The name of the certificate to use for signing the file",
                                 alias='cert-name')
-) -> SignResponse:
+) -> JSONResponse:
     """
-    Sign a file using a specified certificate and return the file UUID.
+    Sign a file using a specified certificate and return the file UUID along with HTTP headers indicating the task status.
 
     - **request**: FastAPI request object containing the file sent by the client.
     - **background_tasks**: Background tasks for asynchronous operations.
@@ -78,7 +76,7 @@ async def sign(
 
     background_tasks.add_task(sign_flow, content, cert_name, file_uuid)
 
-    return SignResponse(uuid=file_uuid)
+    return JSONResponse(content={"uuid": file_uuid}, headers={"Task-Status": "Completed"}, status_code=200)
 
 
 @app.get("/get_signed/{file_uuid}")
