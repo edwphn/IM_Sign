@@ -1,4 +1,6 @@
 # _sign_pdf.pdf
+import asyncio
+import time
 
 from endesive import pdf
 from datetime import datetime, timezone
@@ -29,15 +31,15 @@ async def save_signed_file(file_content, file_uuid):
     except IOError as e:
         await _database.execute_query(_database.insert_DocumentsHistory,
                                       (file_uuid, 'Failed', 'Failed to save signed file to the filesystem'))
-        logger.error(f"Failed to save signed file {file_uuid}. Error: {e}")
+        logger.error(f"Failed to save file {file_uuid}. Error: {e}")
     else:
         await _database.execute_query(_database.insert_DocumentsHistory,
                                       (file_uuid, 'Saved', 'Signed file saved successfully'))
-        logger.info(f"Signed file saved successfully: {file_uuid}")
+        logger.info(f"Saved: {file_uuid}.")
 
 
 async def sign_pdf(data: bytes, cert_name: str, file_uuid: str):
-    logger.info(f'Initializing signing process for {file_uuid} with certificate {cert_name}.')
+    logger.debug(f'Initializing signing process for {file_uuid} with certificate {cert_name}.')
     timestamp = SignTime()
     dct = {
         "sigpage": 0,
@@ -59,11 +61,12 @@ async def sign_pdf(data: bytes, cert_name: str, file_uuid: str):
     else:
         await _database.execute_query(_database.insert_DocumentsHistory, (file_uuid, 'Signed', 'File was signed'))
         await _database.execute_query(_database.update_Documents, (timestamp.db(), file_uuid))
-        logger.success(f"{file_uuid} successfully signed with {cert_name}.")
+        logger.info(f"Signed {file_uuid} with {cert_name}.")
 
     return data + signature
 
 
 async def sign_flow(file_content, cert_name, file_uuid):
+    # await asyncio.sleep(30)
     signed_content = await sign_pdf(file_content, cert_name, file_uuid)
     await save_signed_file(signed_content, file_uuid)

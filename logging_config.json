@@ -1,0 +1,67 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S"
+        },
+        "uvicorn_format": {
+            "format": "%(asctime)s | %(levelname)s | [UVICORN] | %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S"
+        }
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "standard",
+            "stream": "ext://sys.stdout"
+        },
+        "file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "standard",
+            "filename": "file.log",
+            "maxBytes": 10485760,
+            "backupCount": 10,
+            "encoding": "utf8"
+        },
+        "uvicorn_console_and_file": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "uvicorn_format",
+            "stream": "ext://sys.stdout"
+        },
+        "uvicorn_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "uvicorn_format",
+            "filename": "file.log",
+            "maxBytes": 10485760,
+            "backupCount": 10,
+            "encoding": "utf8"
+        }
+    },
+    "root": {
+        "level": "DEBUG",
+        "handlers": ["console", "file"]
+    },
+    "loggers": {
+        "uvicorn": {
+            "level": "DEBUG",
+            "handlers": ["uvicorn_console_and_file", "uvicorn_file"],
+            "propagate": false
+        },
+        "uvicorn.error": {
+            "level": "DEBUG",
+            "handlers": ["uvicorn_console_and_file", "uvicorn_file"],
+            "propagate": false
+        },
+        "uvicorn.access": {
+            "level": "DEBUG",
+            "handlers": ["uvicorn_console_and_file", "uvicorn_file"],
+            "propagate": false
+        }
+    }
+}
