@@ -14,7 +14,6 @@ from fastapi import FastAPI, BackgroundTasks, Header, Request, HTTPException
 from fastapi.responses import JSONResponse
 from starlette.responses import FileResponse
 
-
 app = FastAPI()
 
 # Maintenance on startup
@@ -22,13 +21,15 @@ logger.info("Initializing maintenance.")
 app.add_event_handler("startup", maintenance.check_directories)
 app.add_event_handler("startup", maintenance.create_tables)
 app.add_event_handler("startup", maintenance.check_certificates)
+app.add_event_handler("startup", maintenance.start_scheduler)
+app.add_event_handler("shutdown", maintenance.shutdown_scheduler)
 
 
 class SignResponse(BaseModel):
     uuid: str
 
+
 # TODO add to base model header. do not forget to documentation
-# TODO remove files that exists longer than 2 days
 
 @app.post("/sign", response_model=SignResponse, summary="Sign a file",
           description="Receives a file and a certificate name from the sender, signs the file asynchronously.")
