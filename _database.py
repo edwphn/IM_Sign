@@ -1,4 +1,4 @@
-# _database.py
+# _database.py - database module for IM Sign (FastAPI) application.
 
 import pyodbc
 import asyncio
