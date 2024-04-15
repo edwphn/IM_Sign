@@ -39,7 +39,7 @@ async def save_signed_file(file_content, file_uuid):
 
 
 async def sign_pdf(data: bytes, cert_name: str, file_uuid: str):
-    logger.info(f'Initializing signing process for {file_uuid} with certificate {cert_name}.')
+    logger.debug(f'Initializing signing process for {file_uuid} with certificate {cert_name}.')
     timestamp = SignTime()
     dct = {
         "sigpage": 0,
